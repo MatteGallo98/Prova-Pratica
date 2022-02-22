@@ -5,13 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderProduct extends Model
+class ReportType extends Model
 {
     use HasFactory;
+
+    public $timestap= false;
 
     protected $guarded = [
 
     ];
 
-    public $timestamps = false;
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
 }
