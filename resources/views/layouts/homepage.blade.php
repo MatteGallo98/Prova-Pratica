@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-        <link type="stylesheet" css="{{ asset('css/style.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -26,6 +26,14 @@
     <body class="antialiased">
             <div class="Navbar">
                 @yield('navbar')
+            </div>
+            <div class="SplashPage">
+                 <div class="testoSplash">
+                    <h2> Compra quello che vuoi. Quando vuoi</h2>
+                </div>
+            </div>
+            <div class="productList">
+                @yield('productsList')
             </div>
     </body>
 </html>
