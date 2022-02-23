@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('agency_name');
-            $table->string('agent_name')->nullable();
+            $table->string('agency_name')->nullable();
+            $table->string('agent_name');
             $table->unsignedInteger('phone');
             $table->boolean('admin')->default(0);
             $table->text('address');

@@ -25,17 +25,44 @@
     </head>
     <body class="antialiased">
         <div class="loginForm">
-            <form action="{{route('login')}}" method="post">
+            <form action="{{isset($user) ? route('user.update') : route('user.store')}}" method="post">
                 @csrf
+
                 <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" required>
-                    <small id="emailHelp" class="form-text text-muted">Non condivideremo la tua email con nessuno.</small>
+                    <label for="username">Nome Utente</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Nome" required>
                 </div>
+
+                <div class="form-group">
+                    <label for="agency_name">Nome Azienda</label>
+                    <input type="text" name="agency_name" class="form-control" id="agency_name" placeholder="Azienda">
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Indirizzo</label>
+                    <input type="text" name="address" class="form-control" id="address" placeholder="Indirizzo">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefono</label>
+                    <input type="tel" name="phone" class="form-control" id="phone" placeholder="Telefono" pattern="[0-9]{7,9}">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-control" id="emailUser" placeholder="Email" required>
+                </div>
+
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+                    <input type="password" name="password" class="form-control" id="passwordUser" placeholder="Password" required>
                 </div>
+
+                <div class="form-group">
+                    <label for="admin">Admin</label>
+                    <input type="checkbox" name="admin" id="admin" value="1" >
+                </div>
+
                 <button type="submit" class="btn btn-primary buttonLogin">Login</button>
             </form>
         </div>

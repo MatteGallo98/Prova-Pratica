@@ -1,5 +1,6 @@
-.Navbar{
-    background-color: brown!important;
+.navbar{
+   padding-left: 10px!important;
+   padding-right: 10px!important;
 }
 
 .SplashPage{
@@ -12,6 +13,41 @@
     opacity: 0.5;
     text-align: center;
     display: table;
+}
+
+.titleGest{
+    text-align: center;
+}
+
+.ButtonInserisci{
+    text-align: right;
+    margin-right:10px;
+}
+
+input[type=checkbox]{
+ width:2%!important;
+}
+
+.titleGest h2{
+    color:rgb(20, 111, 163);
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.userTable{
+    text-align: center;
+    margin:10px;
+}
+
+table {
+    border-collapse: collapse;
+    width:100%;
+    border: 1px solid black;
+   
+}
+
+tbody, tr, th{
+    border: 1px solid black!important;
 }
 
 .testoSplash{
@@ -34,12 +70,12 @@
 .typeProduct{
     margin-left:0;
     width: 30%;
-    background-color: rgb(17, 0, 255);
+    background-color: #e3f2fd!important;
 }
 
 .type{
     font-size: 1.2em;
-    color: antiquewhite;
+    color: black;
 }
 
 .login{

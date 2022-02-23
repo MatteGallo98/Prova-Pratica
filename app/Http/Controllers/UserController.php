@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
+
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
 {
     /**
@@ -13,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('gest_utenti')->with('users', User::get());
     }
 
     /**
@@ -23,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user');
     }
 
     /**
@@ -34,7 +38,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+
+        User::create([
+            'name'=>$request->name,
+            'agency_name'=>$request->agency_name,
+            "address" => $request->address,
+            "phone" => $request->phone,
+            "email" => $request->email,
+            "password" => Hash::make($request->password),
+            "admin" => ($request->admin === "1" ? 1 : 0)
+        ]);
+        return redirect()->route('gest_utenti');
     }
 
     /**
@@ -56,7 +71,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('user')->with('user', User::where('id', $id)->first());
     }
 
     /**
@@ -81,4 +96,5 @@ class UserController extends Controller
     {
         //
     }
+
 }

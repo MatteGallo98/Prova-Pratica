@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Login</title>
+        <title>BuyMe</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -24,20 +24,56 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="loginForm">
-            <form action="{{route('login')}}" method="post">
-                @csrf
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" required>
-                    <small id="emailHelp" class="form-text text-muted">Non condivideremo la tua email con nessuno.</small>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
-                </div>
-                <button type="submit" class="btn btn-primary buttonLogin">Login</button>
-            </form>
-        </div>
+            <div class="Navbar">
+                <x-navbar/>
+            </div>
+            <div class="titleGest">
+                <h2>Gestione Utenti</h2>
+            </div>
+            <div class="ButtonInserisci">
+                <a class="btn btn-primary" href="{{route('user.create')}}">Aggiungi Utente</a>
+            </div>
+            <div class="userTable">
+                <table>
+                    <tr>
+                        <th>Nome utente</th>
+                        <th>Nome Azienda</th>
+                        <th>Email</th>
+                        <th>Numero di telefono</th>
+                        <th>Indirizzo</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @if($users)
+                        @foreach($users as $user)
+                        @php
+                         $id= $user->id;
+                        @endphp
+
+                      
+                        <tr>
+                            <th>{{$user->name}}</th>
+                            <th>{{$user->agency_name}}</th>
+                            <th>{{$user->email}}</th>
+                            <th>{{$user->phone}}</th>
+                            <th>{{$user->address}}</th>
+                            <th><a href="{{route('user.edit', ['id'=> $id])}}">Modifica</a></th>
+                            <th>
+                                <a href="{{route('user.destroy', ['id'=> $id])}}"  
+                                    onclick="event.preventDefault();
+                                    document.getElementById('destroyuser-form').submit();">
+                                    Cancella
+                                </a>
+
+                                <form id="destroyuser-form" action="{{route('user.destroy', ['id'=> $id])}}"  method="POST" class="d-none" style="display: none" >
+                                        @csrf
+                                </form>
+                        </th>
+                        </tr>
+                        @endforeach
+                    @endif
+                <table>
+            </div>        
     </body>
 </html>
+
