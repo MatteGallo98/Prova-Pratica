@@ -49,3 +49,13 @@
 .brand{
     margin-left: 2px;
 }
+
+.loginForm{
+    margin: 10%;
+    border: 1px solid rgb(20, 111, 163);
+    padding: 1%;
+}
+
+.buttonLogin{
+    margin-top:10px;
+}

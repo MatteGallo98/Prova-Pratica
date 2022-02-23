@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'ProductController@index')->name('homepage');
 
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -22,6 +24,10 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Auth::routes();
+
+Route::get('/login', function () {
+    return view('login');
+} )->middleware(['guest'])->name('login');
 
 /*
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

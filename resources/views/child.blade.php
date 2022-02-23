@@ -7,19 +7,40 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                    @if (Route::has('login'))
-                        <ul class="navbar-nav ml-auto login">
-                            @auth
-                            <li class="nav-item">
-                                <a href="{{ url('/dashboard') }}" class="nav-link underline me-auto">Dashboard</a>
-                            </li>
-                            @else
+                <ul class="navbar-nav ms-auto">
+                    @guest
+                        @if (Route::has('login'))
+                                @auth
                                 <li class="nav-item">
-                                    <a href="{{ route('login') }}" class="nav-link underline me-auto">Log in</a>
+                                    <a href="{{ url('/dashboard') }}" class="nav-link underline me-auto">Dashboard</a>
                                 </li>
-                            @endauth
-                        </ul>
-                    @endif
+                                @else
+                                    <li class="nav-item">
+                                        <a href="{{ route('login') }}" class="nav-link underline me-auto">Log in</a>
+                                    </li>
+                                @endauth
+                            
+                        @endif
+                    @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                     @endguest
+                    </ul>
                 </div>
         </nav>
 @endsection
