@@ -28,6 +28,10 @@ input[type=checkbox]{
  width:2%!important;
 }
 
+.form-group   {
+    margin-bottom: 5px;
+}
+
 .titleGest h2{
     color:rgb(20, 111, 163);
     font-weight: 600;

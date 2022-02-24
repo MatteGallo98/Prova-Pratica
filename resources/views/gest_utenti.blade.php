@@ -36,6 +36,7 @@
             <div class="userTable">
                 <table>
                     <tr>
+                        <th>Tipo Utente</th>
                         <th>Nome utente</th>
                         <th>Nome Azienda</th>
                         <th>Email</th>
@@ -52,12 +53,14 @@
 
                       
                         <tr>
+                            <th>{{$user->admin === 1 ? "Admin" : "Cliente"}}</th>
                             <th>{{$user->name}}</th>
                             <th>{{$user->agency_name}}</th>
                             <th>{{$user->email}}</th>
                             <th>{{$user->phone}}</th>
                             <th>{{$user->address}}</th>
                             <th><a href="{{route('user.edit', ['id'=> $id])}}">Modifica</a></th>
+                            @if($user->id !== Auth::user()->id)
                             <th>
                                 <a href="{{route('user.destroy', ['id'=> $id])}}"  
                                     onclick="event.preventDefault();
@@ -68,7 +71,8 @@
                                 <form id="destroyuser-form" action="{{route('user.destroy', ['id'=> $id])}}"  method="POST" class="d-none" style="display: none" >
                                         @csrf
                                 </form>
-                        </th>
+                            </th>
+                            @endif
                         </tr>
                         @endforeach
                     @endif

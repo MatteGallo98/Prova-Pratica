@@ -24,43 +24,72 @@
         </style>
     </head>
     <body class="antialiased">
+         
+            <div class="Navbar">
+                <x-navbar/>
+            </div>
         <div class="loginForm">
-            <form action="{{isset($user) ? route('user.update') : route('user.store')}}" method="post">
+            <form action="{{isset($user) ? route('user.update', ['id'=> $user->id]) : route('user.store')}}" method="post">
                 @csrf
 
                 <div class="form-group">
                     <label for="username">Nome Utente</label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Nome" required>
+                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Nome" value="{{isset($user->name) && !$errors->any() ?  $user->name : old('name') }}" required>
+                    @error('username')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="agency_name">Nome Azienda</label>
-                    <input type="text" name="agency_name" class="form-control" id="agency_name" placeholder="Azienda">
+                    <input type="text" name="agency_name" class="form-control @error('agency_name') is-invalid @enderror" id="agency_name" placeholder="Azienda" value="{{isset($user->agency_name) && !$errors->any() ?  $user->agency_name : old('agency_name') }}">
+                    @error('agency_name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="address">Indirizzo</label>
-                    <input type="text" name="address" class="form-control" id="address" placeholder="Indirizzo">
+                    <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" id="address" placeholder="Indirizzo" value="{{isset($user->address) && !$errors->any() ?  $user->address : old('address') }}">
+                    @error('address')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Telefono</label>
-                    <input type="tel" name="phone" class="form-control" id="phone" placeholder="Telefono" pattern="[0-9]{7,9}">
+                    <input type="tel" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Telefono" pattern="[0-9]{7,9}" value="{{isset($user->phone) && !$errors->any() ?  $user->phone : old('phone') }}">
+                    @error('phone')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" id="emailUser" placeholder="Email" required>
+                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="emailUser" placeholder="Email"  value="{{isset($user->email) && !$errors->any() ?  $user->email : old('email') }}" required>
+                    @error('email')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" id="passwordUser" placeholder="Password" required>
-                </div>
+                    <label for="password"> {{isset($user) ? "Nuova Password" : "Password"}}</label>
+                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="passwordUser" placeholder="Password" value="{{ old('password') }}"  
 
+                    @if(!isset($user))
+                      required
+                     @endif >
+                    @error('password')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+               
                 <div class="form-group">
                     <label for="admin">Admin</label>
-                    <input type="checkbox" name="admin" id="admin" value="1" >
+                    <input type="checkbox" name="admin" id="admin" value="1" 
+                    @if((int)$user->admin === 1)
+                      checked
+                     @endif >
                 </div>
 
                 <button type="submit" class="btn btn-primary buttonLogin">Login</button>

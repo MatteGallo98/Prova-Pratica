@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Validation\Rule;
+
 use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
@@ -38,8 +40,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'name' => 'required',
+            'agency_name' => 'nullable',
+            "address" => 'required',
+            "phone" => 'nullable|digits_between:7,9',
+            "email" => 'required|email|unique:users,email',
+            "password" => 'required',
+            "admin" => 'boolean'
+        ]);
         
-
         User::create([
             'name'=>$request->name,
             'agency_name'=>$request->agency_name,
@@ -49,6 +59,7 @@ class UserController extends Controller
             "password" => Hash::make($request->password),
             "admin" => ($request->admin === "1" ? 1 : 0)
         ]);
+
         return redirect()->route('gest_utenti');
     }
 
@@ -83,7 +94,36 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'agency_name' => 'nullable',
+            "address" => 'required',
+            "phone" => 'nullable|digits_between:7,9',
+            "email" =>  [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($id),
+            ],
+            "password" => 'nullable',
+            "admin" => 'boolean'
+        ]);
+
+         $array = [
+            'name'=>$request->name,
+            'agency_name'=>$request->agency_name,
+            "address" => $request->address,
+            "phone" => $request->phone,
+            "email" => $request->email,
+            "admin" => ($request->admin === "1" ? 1 : 0)
+        ];
+
+        if(isset($request->password)){
+            $array['password']= Hash::make($request->password);
+        }
+
+        User::where('id', $id)->update($array);
+
+        return redirect()->route('gest_utenti');
     }
 
     /**
@@ -94,7 +134,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::where('id', $id)->firstorfail()->delete();
+        echo ("Utente cancellato con successo.");
+        return redirect()->route('gest_utenti');
     }
 
 }

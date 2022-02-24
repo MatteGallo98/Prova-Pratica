@@ -39,9 +39,9 @@ Route::post('/utente', 'UserController@store')->middleware(['auth'])->name('user
 
 Route::get('/utente/{id}', 'UserController@edit')->middleware(['auth'])->name('user.edit');
 
-Route::post('/utente/{id}', 'UserController@update')->middleware(['auth'])->name('user.update');
+Route::post('/utente/{id}/edit', 'UserController@update')->middleware(['auth'])->name('user.update');
 
-Route::post('/utente/{id}', 'UserController@destroy')->middleware(['auth'])->name('user.destroy');
+Route::post('/utente/{id}/destroy', 'UserController@destroy')->middleware(['auth'])->name('user.destroy');
 
 
 /*
