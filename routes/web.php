@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'ProductController@index')->name('homepage');
+Route::get('/', 'HomeController@index')->name('homepage');
 
 
 
@@ -32,7 +32,7 @@ Route::get('/login', function () {
 Route::get('/gest_utenti', 'UserController@index')->middleware(['auth'])->name('gest_utenti');
 
 
-//gestione utente
+//gestione utenti
 Route::get('/utente', 'UserController@create')->middleware(['auth'])->name('user.create');
 
 Route::post('/utente', 'UserController@store')->middleware(['auth'])->name('user.store');
@@ -42,6 +42,20 @@ Route::get('/utente/{id}', 'UserController@edit')->middleware(['auth'])->name('u
 Route::post('/utente/{id}/edit', 'UserController@update')->middleware(['auth'])->name('user.update');
 
 Route::post('/utente/{id}/destroy', 'UserController@destroy')->middleware(['auth'])->name('user.destroy');
+
+//gestione prodotti
+
+Route::get('/gest_prodotti', 'ProductController@index')->middleware(['auth'])->name('gest_prodotti');
+
+Route::get('/prodotto', 'ProductController@create')->middleware(['auth'])->name('product.create');
+
+Route::post('/prodotto', 'ProductController@store')->middleware(['auth'])->name('product.store');
+
+Route::get('/prodotto/{id}', 'ProductController@edit')->middleware(['auth'])->name('product.edit');
+
+Route::post('/prodotto/{id}/edit', 'ProductController@update')->middleware(['auth'])->name('product.update');
+
+Route::post('/prodotto/{id}/destroy', 'ProductController@destroy')->middleware(['auth'])->name('product.destroy');
 
 
 /*

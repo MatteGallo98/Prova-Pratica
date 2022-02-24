@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('child')->with('products', Product::all());
+        return view('gest_products')->with('products', Product::all());
     }
 
     /**
@@ -24,7 +25,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product');
     }
 
     /**
@@ -35,7 +36,29 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'description' => 'nullable|string',
+            "PS" => 'nullable|boolean',
+            "availability" => [
+                Rule::requiredIf((int)$request->PS!==1)
+            ],
+            "cost" => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            "measure" => 'required|string',
+            "discount" => 'nullable'
+        ]);
+        
+        Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            "PS" => ($request->PS === "1" ? 1 : 0),
+            "availability" => $request->availability,
+            "cost" => $request->cost,
+            "measure" => $request->measure,
+            "discount" => $request->discount,
+        ]);
+
+        return redirect()->route('gest_prodotti');
     }
 
     /**
@@ -57,7 +80,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('product')->with('product', Product::where('id', $id)->first());
     }
 
     /**
@@ -69,7 +92,31 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'description' => 'nullable|string',
+            "PS" => 'nullable|boolean',
+            "availability" => [
+                Rule::requiredIf((int)$request->PS!==1)
+            ],
+            "cost" => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            "measure" => 'required|string',
+            "discount" => 'nullable'
+        ]);
+
+         $product_inf = [
+            'name' => $request->name,
+            'description' => $request->description,
+            "PS" => ($request->PS === "1" ? 1 : 0),
+            "availability" => $request->availability,
+            "cost" => $request->cost,
+            "measure" => $request->measure,
+            "discount" => $request->discount,
+        ];
+
+        Product::where('id', $id)->update($product_inf);
+
+        return redirect()->route('gest_prodotti');
     }
 
     /**
@@ -80,6 +127,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::where('id', $id)->firstorfail()->delete();
+        echo ("Prodotto cancellato con successo.");
+        return redirect()->route('gest_prodotti');
     }
 }

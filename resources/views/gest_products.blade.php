@@ -28,44 +28,46 @@
                 <x-navbar/>
             </div>
             <div class="titleGest">
-                <h2>Gestione Utenti</h2>
+                <h2>Gestione Prodotti</h2>
             </div>
             <div class="ButtonInserisci">
-                <a class="btn btn-primary" href="{{route('user.create')}}">Aggiungi Utente</a>
+                <a class="btn btn-primary" href="{{route('product.create')}}">Aggiungi Prodotto</a>
             </div>
             <div class="userTable">
                 <table>
                     <tr>
-                        <th>Tipo Utente</th>
-                        <th>Nome utente</th>
-                        <th>Nome Azienda</th>
-                        <th>Email</th>
-                        <th>Numero di telefono</th>
-                        <th>Indirizzo</th>
+                        <th>Nome Prodotto/Servizio</th>
+                        <th>Descrizione</th>
+                        <th>Tipo</th>
+                        <th>Disponibilità</th>
+                        <th>Costo e Unità di misura</th>
+                        <th>Sconto</th>
                         <th></th>
                         <th></th>
                     </tr>
-                    @if($users)
+                    @if($products)
+                        @foreach($products as $product)
+                        @php
+                         $id= $product->id;
+                        @endphp
 
-                        @foreach($users as $user)
-                        
-
+                      
                         <tr>
-                            <th>{{$user->admin === 1 ? "Admin" : "Cliente"}}</th>
-                            <th>{{$user->name}}</th>
-                            <th>{{$user->agency_name}}</th>
-                            <th>{{$user->email}}</th>
-                            <th>{{$user->phone}}</th>
-                            <th>{{$user->address}}</th>
-                            <th><a href="{{route('user.edit', ['id'=> $user->id])}}">Modifica</a></th>
-                            @if($user->id !== Auth::user()->id)
+                            <th>{{$product->name}}</th>
+                            <th>{{$product->description}}</th> 
+                            <th>{{$product->PS === 1 ? "Servizio" : "Prodotto"}}</th>
+                            <th>{{$product->availability}}</th>
+                            <th>{{$product->cost.$product->measure}}</th>
+                            <th>{{$product->discount}}</th>
+                            <th><a href="{{route('product.edit', ['id'=> $id])}}">Modifica</a></th>
+                            
                             <th>
-                                <form id="destroyuser-form" action="{{route('user.destroy', ['id'=> $user->id])}}"  method="POST" >
+
+                                <form id="destroyproduct-form" action="{{route('product.destroy', ['id'=> $id])}}"  method="POST" >
                                         @csrf
                                         <input type="submit" value="Cancella" class="buttonSubmit">
                                 </form>
                             </th>
-                            @endif
                         </tr>
                         @endforeach
                     @endif

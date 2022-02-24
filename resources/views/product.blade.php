@@ -17,6 +17,16 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <script>
+            function showhiddenAvailability(){
+                var nodoDis= document.getElementById('PSdiv');
+                    if(nodoDis.style.display=== 'none'){
+                        nodoDis.style.display= 'block'
+                    }else{
+                        nodoDis.style.display= 'none'
+                    }
+            }
+        </script>
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
@@ -29,67 +39,100 @@
                 <x-navbar/>
             </div>
         <div class="Form">
-            <form action="{{isset($user) ? route('user.update', ['id'=> $user->id]) : route('user.store')}}" method="post">
+            <form action="{{isset($product) ? route('product.update', ['id'=> $product->id]) : route('product.store')}}" method="post">
                 @csrf
 
                 <div class="form-group">
-                    <label for="name">Nome Utente</label>
-                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Nome" value="{{isset($user->name) && !$errors->any() ?  $user->name : old('name') }}" pattern="[^\d]+" required>
+                    <label for="name">Nome Prodotto</label>
+                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Nome" value="{{isset($product->name) && !$errors->any() ?  $product->name : old('name') }}" pattern="[^\d]+" required>
                     @error('name')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="form-group">
-                    <label for="agency_name">Nome Azienda</label>
-                    <input type="text" name="agency_name" class="form-control @error('agency_name') is-invalid @enderror" id="agency_name" placeholder="Azienda" value="{{isset($user->agency_name) && !$errors->any() ?  $user->agency_name : old('agency_name') }}">
-                    @error('agency_name')
+                    <label for="description">Descrizione</label>
+                    <textarea rows="2" name="description" class="form-control @error('description') is-invalid @enderror" id="description" placeholder="Descrizione"  >{{isset($product->description) && !$errors->any() ?  $product->description : old('description') }}</textarea>
+                    
+                    @error('description')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="form-group">
-                    <label for="address">Indirizzo</label>
-                    <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" id="address" placeholder="Indirizzo" value="{{isset($user->address) && !$errors->any() ?  $user->address : old('address') }}">
-                    @error('address')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Telefono</label>
-                    <input type="tel" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Telefono" pattern="[0-9]{7,9}" value="{{isset($user->phone) && !$errors->any() ?  $user->phone : old('phone') }}">
-                    @error('phone')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="emailUser" placeholder="Email"  value="{{isset($user->email) && !$errors->any() ?  $user->email : old('email') }}" required>
-                    @error('email')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label for="password"> {{isset($user) ? "Nuova Password" : "Password"}}</label>
-                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="passwordUser" placeholder="Password" value="{{ old('password') }}"  
-
-                    @if(!isset($user))
-                      required
-                     @endif >
-                    @error('password')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-               
-                <div class="form-group">
-                    <label for="admin">Admin</label>
-                    <input type="checkbox" name="admin" id="admin" value="1" 
-                    @if(isset($user->admin) && (int)$user->admin === 1)
+                    <label for="PS">Servizio (di default Prodotto)</label>
+                    <input type="checkbox" name="PS" id="PS" value="1" onclick="showhiddenAvailability()"
+                     @if(isset($product) && (int)$product->PS === 1)
                       checked
                      @endif >
+                </div>
+                
+
+                <div class="form-group" id="PSdiv">
+                    <label for="availability">Disponibilità</label>
+                    <input type="number" name="availability" class="form-control @error('availability') is-invalid @enderror" id="availability" placeholder="Disponibilità"  value="{{isset($product->availability) && !$errors->any() ?  $product->availability : old('availability') }}">
+                    @error('availability')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="cost">Prezzo</label>
+                    <input type="string" name="cost" class="form-control @error('cost') is-invalid @enderror" id="cost" placeholder="Prezzo" value="{{isset($product->cost) && !$errors->any() ?  $product->cost : old('cost') }}" required>
+                    @error('cost')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="measure">Unità di misura</label>
+                    <select id="measure" name="measure" class="form-select" aria-label="Default select example" >
+                        @php
+                            $options= ["€/unità", "€/ora", "€/minuto", "€/kg"];
+                        @endphp
+
+                        @foreach($options as $option){
+                            @if (old('measure') == $option ||(isset($product) && $product->measure == $option))
+                                <option value="{{$option}}" selected>{{$option}}</option>  
+                                @else
+                                <option value="{{$option}}">{{$option}}</option>  
+                            @endif
+                             
+                        @endforeach
+                    </select>
+                    @error('cost')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="discount">Sconto</label>
+                    <select id="discount" name="discount" class="form-select" aria-label="Default select example">
+                        <option value=""></option> 
+                        @php
+                            $discounts = createDiscounts();
+
+                            function createDiscounts(){
+                                $dis= array();
+                                for($i=5; $i<=100;$i+=5){
+                                    array_push($dis, $i."%");
+                                }
+
+                                return $dis;
+                            }
+                        @endphp
+
+                        @foreach($discounts as $discount){
+                            @if (old('discount') == $discount ||(isset($product) && $product->discount == $discount))
+                                <option value="{{$discount}}" selected>{{$discount}}</option>  
+                                @else
+                                <option value="{{$discount}}">{{$discount}}</option>  
+                            @endif
+                        @endforeach
+                    </select>
+                    @error('cost')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-primary buttonLogin">Salva</button>

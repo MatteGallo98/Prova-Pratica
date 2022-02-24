@@ -95,9 +95,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'required',
-            'agency_name' => 'nullable',
-            "address" => 'required',
+            'name' => 'required|string',
+            'agency_name' => 'nullable|string',
+            "address" => 'required|string',
             "phone" => 'nullable|digits_between:7,9',
             "email" =>  [
                 'required',
@@ -108,7 +108,7 @@ class UserController extends Controller
             "admin" => 'boolean'
         ]);
 
-         $array = [
+         $user_inf = [
             'name'=>$request->name,
             'agency_name'=>$request->agency_name,
             "address" => $request->address,
@@ -121,7 +121,7 @@ class UserController extends Controller
             $array['password']= Hash::make($request->password);
         }
 
-        User::where('id', $id)->update($array);
+        User::where('id', $id)->update($user_inf);
 
         return redirect()->route('gest_utenti');
     }
@@ -134,7 +134,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::where('id', $id)->firstorfail()->delete();
+        dd($id);
+        User::find($id)->delete();
         echo ("Utente cancellato con successo.");
         return redirect()->route('gest_utenti');
     }

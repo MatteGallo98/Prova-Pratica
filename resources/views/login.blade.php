@@ -24,7 +24,7 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="loginForm">
+        <div class="Form">
             <form action="{{route('login')}}" method="post">
                 @csrf
                 <div class="form-group">
