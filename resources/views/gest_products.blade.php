@@ -50,8 +50,6 @@
                         @php
                          $id= $product->id;
                         @endphp
-
-                      
                         <tr>
                             <th>{{$product->name}}</th>
                             <th>{{$product->description}}</th> 
@@ -72,7 +70,8 @@
                         @endforeach
                     @endif
                 <table>
-            </div>        
+            </div>
+            {{$products->links()}}        
     </body>
 </html>
 

@@ -15,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('gest_products')->with('products', Product::all());
+        $products= Product::paginate(2)->withQueryString();
+        return view('gest_products')->with('products', $products);
     }
 
     /**
