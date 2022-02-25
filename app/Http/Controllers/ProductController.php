@@ -26,8 +26,7 @@ class ProductController extends Controller
             ->paginate($perPage)->withQueryString();
         }
         elseif(request('column')){
-            $products= Product::select("*")
-            ->orderBy(request('column'), request('type'))
+            $products= Product::orderBy(request('column'), request('type'))
             ->paginate($perPage)->withQueryString();
         }
         else{

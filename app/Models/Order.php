@@ -13,8 +13,17 @@ class Order extends Model
 
     ];
 
-    public function orderProducts()
+    protected $with= [
+        'products', 'user'
+    ];
+
+    public function products()
     {
-        return $this->hasMany(OrderProduct::class);
+        return $this->belongsToMany(Product::class)->withPivot('amount');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

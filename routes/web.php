@@ -48,6 +48,21 @@ Route::post('/prodotto/{id}/edit', 'ProductController@update')->middleware(['aut
 
 Route::post('/prodotto/{id}/destroy', 'ProductController@destroy')->middleware(['auth'])->name('product.destroy');
 
+//gestione ordini
+
+Route::get('/gest_ordini', 'OrderController@index')->middleware(['auth'])->name('gest_ordini');
+
+Route::get('/ordine', 'OrderController@create')->middleware(['auth'])->name('order.create');
+
+Route::post('/ordine', 'OrderController@store')->middleware(['auth'])->name('order.store');
+
+Route::get('/ordine/{id}', 'OrderController@edit')->middleware(['auth'])->name('order.edit');
+
+Route::post('/ordine/{id}/edit', 'OrderController@update')->middleware(['auth'])->name('order.update');
+
+Route::post('/ordine/{id}/destroy', 'OrderController@destroy')->middleware(['auth'])->name('order.destroy');
+
+
 require __DIR__.'/auth.php';
 
 /*

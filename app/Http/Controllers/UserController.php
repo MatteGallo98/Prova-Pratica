@@ -19,7 +19,33 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('gest_utenti')->with('users', User::get());
+        $perPage= request('perPage') ? request('perPage') : 2;
+
+        $users = User::when(request('search'), function($query) {
+            $query->where(
+                'name', 'LIKE', '%'.request('search').'%'
+            )
+            ->orWhere(
+                'email', 'LIKE', '%'.request('search').'%'
+            );
+        })
+        ->when(request('column'), function($query) {
+            $query->orderBy(request('column'), request('type'));
+        })
+        ->paginate($perPage)->withQueryString();
+
+        $query = User::query();
+
+        if(request('search')) {
+            $query = $query->where();
+        }
+
+        $query = $query->paginate();
+
+        return view('gest_utenti')->with([
+            'users'=> $users,
+            'perPage'=>$perPage
+        ]);
     }
 
     /**

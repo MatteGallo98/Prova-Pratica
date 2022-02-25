@@ -33,6 +33,9 @@
                                         <a class="dropdown-item" href="{{ route('gest_prodotti') }}">
                                             Gestione Prodotti
                                         </a>
+                                        <a class="dropdown-item" href="{{ route('gest_ordini') }}">
+                                            Gestione Ordini
+                                        </a>
                                     @endif
                                     
                                     <a class="dropdown-item" href="{{ route('logout') }}"

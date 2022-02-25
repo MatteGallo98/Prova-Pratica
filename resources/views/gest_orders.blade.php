@@ -17,23 +17,23 @@
         </style>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
         <script>
+          
             function changeFunc() {
                 const queryString = window.location.search;
                 const urlParams = new URLSearchParams(queryString);
                 var selectBox = document.getElementById("pageNumber");
                 var selectedValue = selectBox.options[selectBox.selectedIndex].value;
                 if(urlParams.get('search')){
-                    window.location.href= "/gest_utenti?page=1&search="+urlParams.get('search')+"&perPage="+selectedValue;  
+                    window.location.href= "/gest_ordini?page=1&search="+urlParams.get('search')+"&perPage="+selectedValue;  
                 }else{
-                    window.location.href= "/gest_utenti?page=1&perPage="+selectedValue;  
+                    window.location.href= "/gest_ordini?page=1&perPage="+selectedValue;  
                 }
                 
             }
         </script>
+        <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
@@ -45,7 +45,7 @@
                 <x-navbar/>
             </div>
             <div class="titleGest">
-                <h2>Gestione Utenti</h2>
+                <h2>Gestione Ordini</h2>
             </div>
             <div class = "row">
                 <div class="selectPagination col-sm">
@@ -66,79 +66,74 @@
                 </div>   
                 
                 <div class="rightContent col-sm">
-                    <div class="search">
-                        <form action="{{route('gest_utenti')}}">
-                            <input type="text" placeholder="Cerca" name="search" class="searchInput">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </form>
-                    </div>
-                    <a class="btn btn-primary reload" href="{{route('gest_utenti')}}">Ricarica Pagina</a>
-                    <a class="btn btn-primary" href="{{route('user.create')}}">Aggiungi Prodotto</a>
+                    
                 </div>
             </div>
             <div class="userTable">
-            <table class="table table-bordered table-sm" cellspacing="0" width="100%">
+                <table id="dtBasicExample" class="table table-bordered table-sm"  cellspacing="0" width="100%">
                     <tr>
-                    @php
+                        @php
                             $columnsHead = [
-                                'Tipo Utente'=>'admin',
-                                'Nome Utente'=>'name',
-                                'Azienda'=>'agency_name',
-                                'Email'=>'email',
-                                'Telefono'=>'phone',
-                                'Indirizzo'=>'address'
+                                'Email Utente',
+                                'Prodotti',
+                                'Stato Ordine',
+                                'Data ordine',
+                                'Prezzo Finale'
                             ]
                         @endphp
-                        @foreach($columnsHead as $nome=>$campo)
+                        @foreach($columnsHead as $nome)
                             <th class="th-sm">
                                 <div class="row">
                                     <div class="col-sm-9">
                                         {{$nome}}
                                     </div>
-                                    <div class="upAndDown col-sm-3">
-                                        <a class="up" href="{{route('gest_utenti', [
-                                            'perPage'=> $perPage,
-                                            'column' => $campo,
-                                            'type'=> 'ASC'
-                                            ])}}"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
-                                        <a class="down" href="{{route('gest_utenti', [
-                                            'perPage'=> $perPage,
-                                            'column' => $campo,
-                                            'type'=> 'DESC'
-                                            ])}}"><i class="fa fa-arrow-down" aria-hidden="true"></i></a>
-                                    </div>
+                                    
                                 </div>
                             </th>
                         @endforeach
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    @if($users)
-
-                        @foreach($users as $user)
+                        <th class="th-sm"></th>
+                        <th class="th-sm"></th>
                         
+                    </tr>
+                    @if($orders)
+                        @foreach($orders as $order)
+                        @php
+                         $id= $order->id;
+                        @endphp
                         <tr>
-                            <td>{{$user->admin === 1 ? "Admin" : "Cliente"}}</td>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->agency_name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>{{$user->phone}}</td>
-                            <td>{{$user->address}}</td>
-                            <td><a href="{{route('user.edit', ['id'=> $user->id])}}">Modifica</a></td>
-                            @if($user->id !== Auth::user()->id)
+                            <td>{{$order->user->email}}</td>
+                            <td>@foreach($order->products as $product)
+                                   {{$product->name}} 
+                                @endforeach</td>
+                            <td>{{$order->status}}</td>
+                            <td>{{$order->created_at}}</td>
+                            <td><?php
+                                $sum=0;
+                                ?>
+                                    @foreach($order->products as $product)
+                                        <?php
+                                            $percDiscount= ((int)substr($product->discount, 0, -1))/100;
+                                            $sum+= ($product->cost - ($product->cost * $percDiscount))*$product->pivot->amount ;
+                                        ?>
+                                    @endforeach
+                                    {{$sum.'€'}}
+                                </td>
+                            <td><a href="{{route('order.edit', ['id'=> $id])}}">Modifica</a></td>
                             <td>
-                                <form id="destroyuser-form" action="{{route('user.destroy', ['id'=> $user->id])}}"  method="POST" >
+
+                                <form id="destroyproduct-form" action="{{route('order.destroy', ['id'=> $id])}}"  method="POST" >
                                         @csrf
                                         <input type="submit" value="Cancella" class="buttonSubmit">
                                 </form>
                             </td>
-                            @endif
                         </tr>
                         @endforeach
                     @endif
-                <table>
-                {{$users->links()}} 
-            </div>        
+                <table> 
+                
+            </div>
+            {{$orders->links()}} 
+              
     </body>
 </html>
 
