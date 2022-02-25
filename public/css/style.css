@@ -1,3 +1,13 @@
+.up, .down{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.upAndDown{
+    display: flex;
+    justify-content: end;
+}
+
 .navbar{
    padding-left: 10px!important;
    padding-right: 10px!important;
@@ -19,9 +29,41 @@
     text-align: center;
 }
 
-.ButtonInserisci{
+.labelPage{
+    margin-left: 10px;
+    float:left;
+    margin-right: 10px;
+}
+
+#pageNumber{
+    margin-left: 10px;
+    width: 10%!important;
+}
+
+.rightContent{
+    display: flex;
+    justify-content: end;
     text-align: right;
     margin-right:10px;
+}
+
+.reload{
+    margin-right: 10px;
+}
+
+.search{
+    margin-right: 10px;
+}
+
+.searchInput{
+        padding: 0.375rem 0.75rem;
+        font-size: 0.9rem;
+        font-weight: 400;
+        line-height: 1.6;
+        color: #212529;
+        background-color: #f8fafc;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
 }
 
 input[type=checkbox]{
@@ -39,15 +81,21 @@ input[type=checkbox]{
 }
 
 .userTable{
+    clear:left;
     text-align: center;
     margin:10px;
 }
+
+.selectPagination{
+    margin-top: 10px;
+}
+
 
 table {
     border-collapse: collapse;
     width:100%;
     border: 1px solid black;
-   
+    margin-bottom: 10px;
 }
 
 tbody, tr, th{

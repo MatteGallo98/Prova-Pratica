@@ -24,6 +24,7 @@
         </style>
     </head>
     <body class="antialiased">
+
             <div class="Navbar">
                 <x-navbar/>
             </div>

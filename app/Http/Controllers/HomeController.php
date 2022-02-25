@@ -12,15 +12,4 @@ class HomeController extends Controller
         return view('child')->with('products', Product::all());
     }
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-   
 }

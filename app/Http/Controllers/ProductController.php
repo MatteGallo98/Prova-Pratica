@@ -13,10 +13,30 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products= Product::paginate(2)->withQueryString();
-        return view('gest_products')->with('products', $products);
+        $perPage= request('perPage') ? request('perPage') : 2;
+        if(request('search')){
+            $products= Product::where(
+                'name', 'LIKE', '%'.request('search').'%'
+            )
+            ->orWhere(
+                'description', 'LIKE', '%'.request('search').'%'
+            )
+            ->paginate($perPage)->withQueryString();
+        }
+        elseif(request('column')){
+            $products= Product::select("*")
+            ->orderBy(request('column'), request('type'))
+            ->paginate($perPage)->withQueryString();
+        }
+        else{
+            $products= Product::paginate($perPage)->withQueryString();
+        }
+        return view('gest_products')->with([
+            'products'=> $products,
+            'perPage'=>$perPage
+        ]);
     }
 
     /**

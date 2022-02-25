@@ -16,15 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('homepage');
 
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';
-
-Auth::routes();
-
 Route::get('/login', function () {
     return view('login');
 } )->middleware(['guest'])->name('login');
@@ -57,7 +48,11 @@ Route::post('/prodotto/{id}/edit', 'ProductController@update')->middleware(['aut
 
 Route::post('/prodotto/{id}/destroy', 'ProductController@destroy')->middleware(['auth'])->name('product.destroy');
 
+require __DIR__.'/auth.php';
 
+/*
+Auth::routes();
+*/
 /*
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 */

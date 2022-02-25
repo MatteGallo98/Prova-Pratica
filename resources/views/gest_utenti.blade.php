@@ -30,11 +30,11 @@
             <div class="titleGest">
                 <h2>Gestione Utenti</h2>
             </div>
-            <div class="ButtonInserisci">
+            <div class="rightContent col-sm">
                 <a class="btn btn-primary" href="{{route('user.create')}}">Aggiungi Utente</a>
             </div>
             <div class="userTable">
-                <table>
+            <table class="table table-bordered table-sm" cellspacing="0" width="100%">
                     <tr>
                         <th>Tipo Utente</th>
                         <th>Nome utente</th>
@@ -51,20 +51,20 @@
                         
 
                         <tr>
-                            <th>{{$user->admin === 1 ? "Admin" : "Cliente"}}</th>
-                            <th>{{$user->name}}</th>
-                            <th>{{$user->agency_name}}</th>
-                            <th>{{$user->email}}</th>
-                            <th>{{$user->phone}}</th>
-                            <th>{{$user->address}}</th>
-                            <th><a href="{{route('user.edit', ['id'=> $user->id])}}">Modifica</a></th>
+                            <td>{{$user->admin === 1 ? "Admin" : "Cliente"}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->agency_name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->phone}}</td>
+                            <td>{{$user->address}}</td>
+                            <td><a href="{{route('user.edit', ['id'=> $user->id])}}">Modifica</a></td>
                             @if($user->id !== Auth::user()->id)
-                            <th>
+                            <td>
                                 <form id="destroyuser-form" action="{{route('user.destroy', ['id'=> $user->id])}}"  method="POST" >
                                         @csrf
                                         <input type="submit" value="Cancella" class="buttonSubmit">
                                 </form>
-                            </th>
+                            </td>
                             @endif
                         </tr>
                         @endforeach
