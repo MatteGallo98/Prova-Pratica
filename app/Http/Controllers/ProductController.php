@@ -74,7 +74,7 @@ class ProductController extends Controller
             ],
             "cost" => 'required|regex:/^\d+(\.\d{1,2})?$/',
             "measure" => 'required|string',
-            "discount" => 'nullable'
+            "discount" => 'nullable|integer'
         ]);
         
         Product::create([
@@ -130,7 +130,7 @@ class ProductController extends Controller
             ],
             "cost" => 'required|regex:/^\d+(\.\d{1,2})?$/',
             "measure" => 'required|string',
-            "discount" => 'nullable'
+            "discount" => 'nullable|integer'
         ]);
 
          $product_inf = [

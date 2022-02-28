@@ -80,20 +80,31 @@
                     <tr>
                         @php
                             $columnsHead = [
-                                'Email Utente',
-                                'Prodotti',
-                                'Stato Ordine',
-                                'Data ordine',
-                                'Prezzo Finale'
+                                'Email Utente'=>'email',
+                                'Prodotti'=>'prod',
+                                'Stato Ordine'=>'stato',
+                                'Data ordine'=>'data',
+                                'Prezzo Finale'=>'prezzo'
                             ]
                         @endphp
-                        @foreach($columnsHead as $nome)
+                        @foreach($columnsHead as $nome=>$campo)
                             <th class="th-sm">
                                 <div class="row">
                                     <div class="col-sm-9">
                                         {{$nome}}
                                     </div>
-                                    
+                                    <div class="upAndDown col-sm-3">
+                                        <a class="up" href="{{route('gest_ordini', [
+                                            'perPage'=> $perPage,
+                                            'column' => $campo,
+                                            'type'=> 'ASC'
+                                            ])}}"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+                                        <a class="down" href="{{route('gest_ordini', [
+                                            'perPage'=> $perPage,
+                                            'column' => $campo,
+                                            'type'=> 'DESC'
+                                            ])}}"><i class="fa fa-arrow-down" aria-hidden="true"></i></a>
+                                    </div>
                                 </div>
                             </th>
                         @endforeach
@@ -116,9 +127,10 @@
                             <td><?php
                                 $sum=0;
                                 ?>
+                                  @dd($order->products);
                                     @foreach($order->products as $product)
                                         <?php
-                                            $percDiscount= ((int)substr($product->discount, 0, -1))/100;
+                                            $percDiscount= $product->discount/100;
                                             $sum+= ($product->cost - ($product->cost * $percDiscount))*$product->pivot->amount ;
                                         ?>
                                     @endforeach

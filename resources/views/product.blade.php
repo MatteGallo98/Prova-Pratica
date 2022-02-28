@@ -115,7 +115,7 @@
                             function createDiscounts(){
                                 $dis= array();
                                 for($i=5; $i<=100;$i+=5){
-                                    array_push($dis, $i."%");
+                                    array_push($dis, $i);
                                 }
 
                                 return $dis;
@@ -124,9 +124,9 @@
 
                         @foreach($discounts as $discount){
                             @if (old('discount') == $discount ||(isset($product) && $product->discount == $discount))
-                                <option value="{{$discount}}" selected>{{$discount}}</option>  
+                                <option value="{{$discount}}" selected>{{$discount.'%'}}</option>  
                                 @else
-                                <option value="{{$discount}}">{{$discount}}</option>  
+                                <option value="{{$discount}}">{{$discount.'%'}}</option>  
                             @endif
                         @endforeach
                     </select>

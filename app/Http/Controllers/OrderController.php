@@ -28,12 +28,26 @@ class OrderController extends Controller
             })
             ->orWhere('status', 'LIKE', '%'.request('search').'%');
         })
-        ->when(request('order'), function($order){
-            $order->setEagerLoads([])->join(reqest('table'), 'order'.request('table').'_id','=',request('table').'.id');
+        ->when(request('column'), function($order){
+            $order->setEagerLoads([])->join(
+                'users', 'orders.user_id','=','users.id'
+            )->join(
+                'order_product', 'order_product.order_id','=','orders.id'
+            )->join(
+                'products', 'order_product.product_id','=','products.id'
+            );
+
+            switch(request('column')){
+                case 'email':
+                    $order->orderBy('users.email', request('type'));
+                    break;
+                default:
+                    return null;
+            }
         })
         ->paginate($perPage)->withQueryString();
 
-
+      
         return view('gest_orders')->with([
             'orders'=> $orders,
             'perPage'=>$perPage

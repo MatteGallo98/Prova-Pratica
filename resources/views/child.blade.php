@@ -6,7 +6,7 @@
         @php
            $price = $prod->cost;
            $sconto = $prod->discount;
-           $percDiscount= ((int)substr($sconto, 0, -1))/100;
+           $percDiscount= $sconto/100;
            $finaldiscount= $price - ($price * $percDiscount);
 
         @endphp
@@ -17,7 +17,7 @@
             </div>
             <h2 class="titleProd">{{$prod->name}}</h2>
             <p class="descProd">{{$prod->description." di cui rimangono solo ".$prod->availability. " pezzi" }}</p>
-            <p class="Price">{{$price.$prod->measure. " con sconto pari al ".$sconto. " per un complessivo di ". $finaldiscount.$prod->measure}}</p>
+            <p class="Price">{{$price.$prod->measure. " con sconto pari al ".$sconto. "% per un complessivo di ". $finaldiscount.$prod->measure}}</p>
         </div>
       
    @endforeach
