@@ -34,14 +34,6 @@ class UserController extends Controller
         })
         ->paginate($perPage)->withQueryString();
 
-        $query = User::query();
-
-        if(request('search')) {
-            $query = $query->where();
-        }
-
-        $query = $query->paginate();
-
         return view('gest_utenti')->with([
             'users'=> $users,
             'perPage'=>$perPage

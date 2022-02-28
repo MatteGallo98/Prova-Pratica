@@ -66,7 +66,13 @@
                 </div>   
                 
                 <div class="rightContent col-sm">
-                    
+                <div class="search">
+                        <form action="{{route('gest_ordini')}}">
+                            <input type="text" placeholder="Cerca" name="search" class="searchInput">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </form>
+                    </div>
+                    <a class="btn btn-primary reload" href="{{route('gest_ordini')}}">Ricarica Pagina</a>
                 </div>
             </div>
             <div class="userTable">
@@ -116,7 +122,7 @@
                                             $sum+= ($product->cost - ($product->cost * $percDiscount))*$product->pivot->amount ;
                                         ?>
                                     @endforeach
-                                    {{$sum.'€'}}
+                                    {{$sum.' €'}}
                                 </td>
                             <td><a href="{{route('order.edit', ['id'=> $id])}}">Modifica</a></td>
                             <td>

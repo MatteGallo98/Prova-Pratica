@@ -19,7 +19,18 @@ class OrderController extends Controller
     {
         $perPage= request('perPage') ? request('perPage') : 2;
 
-        $orders= Order::paginate($perPage)->withQueryString();
+        $orders= Order::when(request('search'), function ($query){
+            $query->whereHas('user', function($user) {
+                $user->where('email', 'LIKE', '%'.request('search').'%');
+            })
+            ->orWhereHas('products', function($user) {
+                $user->where('name', 'LIKE', '%'.request('search').'%');
+            })
+            ->orWhere('status', 'LIKE', '%'.request('search').'%');
+        })
+        ->paginate($perPage)->withQueryString();
+
+
         return view('gest_orders')->with([
             'orders'=> $orders,
             'perPage'=>$perPage
