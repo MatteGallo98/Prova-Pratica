@@ -28,6 +28,9 @@ class OrderController extends Controller
             })
             ->orWhere('status', 'LIKE', '%'.request('search').'%');
         })
+        ->when(request('order'), function($order){
+            $order->setEagerLoads([])->join(reqest('table'), 'order'.request('table').'_id','=',request('table').'.id');
+        })
         ->paginate($perPage)->withQueryString();
 
 
@@ -89,7 +92,17 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'status'=> 'required|string'
+        ]);
+
+         $order_inf = [
+            'status'=>$request->status
+        ];
+
+        Order::where('id', $id)->update($order_inf);
+
+        return redirect()->route('gest_ordini');
     }
 
     /**

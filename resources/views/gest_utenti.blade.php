@@ -81,12 +81,12 @@
                     <tr>
                     @php
                             $columnsHead = [
-                                'Tipo Utente'=>'admin',
-                                'Nome Utente'=>'name',
-                                'Azienda'=>'agency_name',
+                                'Tipo Utente'=>'tipo',
+                                'Nome Utente'=>'nome',
+                                'Azienda'=>'azienda',
                                 'Email'=>'email',
-                                'Telefono'=>'phone',
-                                'Indirizzo'=>'address'
+                                'Telefono'=>'tel',
+                                'Indirizzo'=>'ind'
                             ]
                         @endphp
                         @foreach($columnsHead as $nome=>$campo)

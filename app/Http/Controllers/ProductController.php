@@ -15,23 +15,32 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+
+        $columnsHead = [
+            'nome'=>'name',
+            'descrizione'=>'description',
+            'tipo'=>'PS',
+            'disponibilita'=>'	availability',
+            'costo'=>'cost',
+            'unitadimisura'=>'measure',
+            'sconto'=>'discount'
+        ];
+
         $perPage= request('perPage') ? request('perPage') : 2;
-        if(request('search')){
-            $products= Product::where(
+
+        $products = Product::when(request('search'), function($query) {
+            $query->where(
                 'name', 'LIKE', '%'.request('search').'%'
             )
             ->orWhere(
                 'description', 'LIKE', '%'.request('search').'%'
-            )
-            ->paginate($perPage)->withQueryString();
-        }
-        elseif(request('column')){
-            $products= Product::orderBy(request('column'), request('type'))
-            ->paginate($perPage)->withQueryString();
-        }
-        else{
-            $products= Product::paginate($perPage)->withQueryString();
-        }
+            );
+        })
+        ->when(request('column'), function($query) use ($columnsHead) {
+            $query->orderBy($columnsHead[request('column')], request('type'));
+        })
+        ->paginate($perPage)->withQueryString();
+
         return view('gest_products')->with([
             'products'=> $products,
             'perPage'=>$perPage

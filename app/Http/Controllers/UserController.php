@@ -19,6 +19,16 @@ class UserController extends Controller
      */
     public function index()
     {
+
+        $columnsHead = [
+            'tipo'=>'admin',
+            'nome'=>'name',
+            'azienda'=>'agency_name',
+            'email'=>'email',
+            'tel'=>'phone',
+            'ind'=>'address'
+        ];
+
         $perPage= request('perPage') ? request('perPage') : 2;
 
         $users = User::when(request('search'), function($query) {
@@ -29,8 +39,8 @@ class UserController extends Controller
                 'email', 'LIKE', '%'.request('search').'%'
             );
         })
-        ->when(request('column'), function($query) {
-            $query->orderBy(request('column'), request('type'));
+        ->when(request('column'), function($query) use ($columnsHead) {
+            $query->orderBy($columnsHead[request('column')], request('type'));
         })
         ->paginate($perPage)->withQueryString();
 

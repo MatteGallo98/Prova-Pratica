@@ -81,13 +81,13 @@
                     <tr>
                         @php
                             $columnsHead = [
-                                'Nome Prodotto/Servizio'=>'name',
-                                'Descrizione'=>'description',
-                                'Tipo'=>'PS',
-                                'Disponibilità'=>'	availability',
-                                'Costo'=>'cost',
-                                'Unita di misura'=>'measure',
-                                'Sconto'=>'discount'
+                                'Nome Prodotto/Servizio'=>'nome',
+                                'Descrizione'=>'descrizione',
+                                'Tipo'=>'tipo',
+                                'Disponibilità'=>'dispobilita',
+                                'Costo'=>'costo',
+                                'Unita di misura'=>'unitadimisura',
+                                'Sconto'=>'sconto'
                             ]
                         @endphp
                         @foreach($columnsHead as $nome=>$campo)
