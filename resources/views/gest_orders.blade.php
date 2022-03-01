@@ -88,7 +88,8 @@
                                 'Prodotti'=>'prod',
                                 'Stato Ordine'=>'stato',
                                 'Data ordine'=>'data',
-                                'Prezzo Finale'=>'prezzo'
+                                'Prezzo Finale'=>'prezzo',
+                                'Prezzo Finale Scontato' => 'pfs'
                             ]
                         @endphp
                         @foreach($columnsHead as $nome=>$campo)
@@ -126,12 +127,12 @@
                         <tr>
                             <td>{{$order->email}}</td>
                             <td>@foreach($order->products as $product)
-                                   {{$product->name}}<br/> 
+                                   {{$product->name. " "}}{{$product->PS==0 ? "(P)" : "(S)"}}<br/> 
                                 @endforeach</td>
                             <td>{{$order->status}}</td>
                             <td>{{\Carbon\Carbon::parse($order->created_at)->format('d M Y')}}</td>
+                            <td>{{$order->final_price.' €'}}</td>
                             <td>{{$order->final_discount_price.' €'}}</td>
-
                             <td><a href="{{route('order.edit', ['id'=> $id])}}">Modifica</a></td>
                             <td>
 

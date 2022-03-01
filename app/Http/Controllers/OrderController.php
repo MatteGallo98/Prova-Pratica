@@ -48,6 +48,9 @@ class OrderController extends Controller
                     $order->orderBy('orders.status', request('type'));
                     break;
                 case 'prezzo':
+                    $order->orderBy('orders.final_price', request('type'));
+                    break;
+                case 'pfs':
                     $order->orderBy('orders.final_discount_price', request('type'));
                     break;
                 default:
