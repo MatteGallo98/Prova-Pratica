@@ -107,6 +107,14 @@ tbody, tr, th{
     vertical-align: middle
 }
 
+.toolbar{
+    margin-top: 1%!important;
+}
+
+.dataProd{
+    font-size: 0.8em;
+}
+
 .buttonSubmit{
     background-color: #f8fafc!important;
     border: none!important;
@@ -116,9 +124,7 @@ tbody, tr, th{
 }
 
 .productList{
-    width: 100%;
-    display: flex;
-    justify-content: center;
+    margin-top: 2%!important;
 }
 .prodDiv{
     width: 30%;
@@ -128,12 +134,14 @@ tbody, tr, th{
 }
 
 .typeProduct{
+    width:fit-content;
+    text-align: left!important;
     margin-left:0;
-    width: 30%;
     background-color: #e3f2fd!important;
 }
 
 .type{
+    margin-right: 1px;
     font-size: 1.2em;
     color: black;
 }

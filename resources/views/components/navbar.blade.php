@@ -19,7 +19,12 @@
                                 @endauth
                             
                         @endif
-                    @else
+                    @else 
+                    @if(Auth::user()->admin === 0)
+                        <li class="nav-item">
+                            <a class="nav-link underline me-auto"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                        </li>
+                    @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -36,6 +41,10 @@
                                         <a class="dropdown-item" href="{{ route('gest_ordini') }}">
                                             Gestione Ordini
                                         </a>
+                                    @else
+                                        <a class="dropdown-item" href="{{ route('gest_utenti') }}">
+                                            Riepilogo Ordini 
+                                        </a>
                                     @endif
                                     
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -49,6 +58,7 @@
                                     </form>
                                 </div>
                             </li>
+                           
                      @endguest
                     </ul>
                 </div>

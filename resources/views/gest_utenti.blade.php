@@ -73,7 +73,7 @@
                         </form>
                     </div>
                     <a class="btn btn-primary reload" href="{{route('gest_utenti')}}">Ricarica Pagina</a>
-                    <a class="btn btn-primary" href="{{route('user.create')}}">Aggiungi Prodotto</a>
+                    <a class="btn btn-primary" href="{{route('user.create')}}">Aggiungi Utenti</a>
                 </div>
             </div>
             <div class="userTable">
