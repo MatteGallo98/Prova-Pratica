@@ -32,9 +32,26 @@
         <div class="Form">
             <form action="{{isset($order) ? route('order.update', ['id'=> $order->id]) : route('order.store')}}" method="post">
                 @csrf
+                @if(isset($users))
+                <div class="form-group">
+                    <label for="user_id">Utente</label>
+                    <select id="user" name="user_id" class="form-select" aria-label="Default select example">
+                            @foreach($users as $user)
+                                @if (old('user_id') == $user->id )
+                                    <option value="{{$user->id }}" selected>{{$user->id.'-'.$user->name}}</option>  
+                                    @else
+                                    <option value="{{$user->id }}">{{$user->id.'-'.$user->name}}</option>  
+                                @endif
+                            @endforeach
+                        
+                    </select>
+                </div>
+                @endif
+
                 <div class="form-group">
                     <label for="status">Stato Ordine</label>
-                    <select id="status" name="status" class="form-select" aria-label="Default select example">
+                    <select id="status" name="status" class="form-select" aria-label="Default select example" >
+                        
                         @php
                             $status = ['In elaborazione', 'Spedito', 'Completato']
 
@@ -52,6 +69,21 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
+
+                @if(isset($products))
+                 <?php  
+                   $pos=0;
+                 ?>
+                  @foreach($products as $product)
+                    @component('prod_block', ['pos'=>$pos, 'product'=>$product])
+                    
+                    @endcomponent
+                    <?php  
+                   $pos+=1;
+                 ?>
+                  @endforeach
+                @endif
+
 
                 <button type="submit" class="btn btn-primary buttonLogin">Salva</button>
             </form>

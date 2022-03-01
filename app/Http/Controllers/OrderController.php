@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Models\Order;
 
-use App\Models\OrderProduct;
+use App\Models\User;
+
+
+use App\Models\Product;
 
 use DB;
 
@@ -22,7 +25,9 @@ class OrderController extends Controller
 
         $perPage= request('perPage') ? request('perPage') : 2;
 
-        $orders= Order::without('user')->when(request('search'), function ($query){
+        $orders= Order::without('user')->join(
+                'users', 'orders.user_id','=','users.id')->
+            when(request('search'), function ($query){
             $query->whereHas('user', function($user) {
                 $user->where('email', 'LIKE', '%'.request('search').'%');
             })
@@ -32,10 +37,6 @@ class OrderController extends Controller
             ->orWhere('status', 'LIKE', '%'.request('search').'%');
         })
         ->when(request('column'), function($order){
-            $order->join(
-                'users', 'orders.user_id','=','users.id'
-            )->select('orders.*','users.email');
-
             switch(request('column')){
                 case 'email':
                     $order->orderBy('users.email', request('type'));
@@ -46,10 +47,14 @@ class OrderController extends Controller
                 case 'stato':
                     $order->orderBy('orders.status', request('type'));
                     break;
+                case 'prezzo':
+                    $order->orderBy('orders.final_discount_price', request('type'));
+                    break;
                 default:
                     return $order;
             }
         })
+        ->select('orders.*','users.email')
         ->paginate($perPage)->withQueryString();
          
       
@@ -66,7 +71,13 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $users=User::get();
+        $products=Product::get();
+
+        return view('order')->with([
+            'users'=>$users,
+            'products'=>$products
+        ]);
     }
 
     /**
@@ -77,7 +88,45 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $request->validate([
+            'status' => 'required|string',
+            'user_id' => 'required|integer',
+            "product.*"  => "required|string",
+            "amount.*"  => "nullable|integer|min:1",
+        ]);
+        
+        $order= Order::create([
+            'status' => $request->status,
+            'user_id' => $request->user_id,
+        ]);
+        $products=$request->product;
+        $i=0;
+        $finalprice= 0.00;
+        $finaldisprice=0.00;
+
+        foreach($products as $product){
+            if(isset($request->amount[$i])){
+                $currentProd=Product::find($product);
+                $finalprice+= $currentProd->cost*$request->amount[$i];
+                $finaldisprice+=($currentProd->cost-($currentProd->cost * $currentProd->discount/100 )) * $request->amount[$i];
+
+                $insertOrderProd= DB::table('order_product')->insert([
+                'order_id'=> $order->id,
+                'product_id'=>$product,
+                'amount'=>$request->amount[$i]
+                ]);
+            }
+           $i+=1;
+        }
+
+        Order::where('id', $order->id)->update([
+            'final_price'=>$finalprice,
+            'final_discount_price'=>$finaldisprice
+        ]);
+
+        return redirect()->route('gest_ordini');
+
     }
 
     /**

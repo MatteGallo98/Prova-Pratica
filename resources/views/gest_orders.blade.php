@@ -35,6 +35,9 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <style>
+            td{
+                vertical-align: middle;
+            }
             body {
                 font-family: 'Nunito', sans-serif;
             }
@@ -73,6 +76,7 @@
                         </form>
                     </div>
                     <a class="btn btn-primary reload" href="{{route('gest_ordini')}}">Ricarica Pagina</a>
+                    <a class="btn btn-primary" href="{{route('order.create')}}">Aggiungi Ordine</a>
                 </div>
             </div>
             <div class="userTable">
@@ -122,21 +126,12 @@
                         <tr>
                             <td>{{$order->email}}</td>
                             <td>@foreach($order->products as $product)
-                                   {{$product->name}} 
+                                   {{$product->name}}<br/> 
                                 @endforeach</td>
                             <td>{{$order->status}}</td>
                             <td>{{\Carbon\Carbon::parse($order->created_at)->format('d M Y')}}</td>
-                            <td><?php
-                                $sum=0;
-                                ?>
-                                    @foreach($order->products as $product)
-                                        <?php
-                                            $percDiscount= $product->discount/100;
-                                            $sum+= ($product->cost - ($product->cost * $percDiscount))*$product->pivot->amount ;
-                                        ?>
-                                    @endforeach
-                                    {{$sum.' €'}}
-                                </td>
+                            <td>{{$order->final_discount_price.' €'}}</td>
+
                             <td><a href="{{route('order.edit', ['id'=> $id])}}">Modifica</a></td>
                             <td>
 
