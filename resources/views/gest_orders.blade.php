@@ -93,18 +93,20 @@
                                     <div class="col-sm-9">
                                         {{$nome}}
                                     </div>
-                                    <div class="upAndDown col-sm-3">
-                                        <a class="up" href="{{route('gest_ordini', [
-                                            'perPage'=> $perPage,
-                                            'column' => $campo,
-                                            'type'=> 'ASC'
-                                            ])}}"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
-                                        <a class="down" href="{{route('gest_ordini', [
-                                            'perPage'=> $perPage,
-                                            'column' => $campo,
-                                            'type'=> 'DESC'
-                                            ])}}"><i class="fa fa-arrow-down" aria-hidden="true"></i></a>
-                                    </div>
+                                    @if($campo!=='prod')
+                                        <div class="upAndDown col-sm-3">
+                                            <a class="up" href="{{route('gest_ordini', [
+                                                'perPage'=> $perPage,
+                                                'column' => $campo,
+                                                'type'=> 'ASC'
+                                                ])}}"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+                                            <a class="down" href="{{route('gest_ordini', [
+                                                'perPage'=> $perPage,
+                                                'column' => $campo,
+                                                'type'=> 'DESC'
+                                                ])}}"><i class="fa fa-arrow-down" aria-hidden="true"></i></a>
+                                        </div>
+                                    @endif
                                 </div>
                             </th>
                         @endforeach
@@ -118,16 +120,15 @@
                          $id= $order->id;
                         @endphp
                         <tr>
-                            <td>{{$order->user->email}}</td>
+                            <td>{{$order->email}}</td>
                             <td>@foreach($order->products as $product)
                                    {{$product->name}} 
                                 @endforeach</td>
                             <td>{{$order->status}}</td>
-                            <td>{{$order->created_at}}</td>
+                            <td>{{\Carbon\Carbon::parse($order->created_at)->format('d M Y')}}</td>
                             <td><?php
                                 $sum=0;
                                 ?>
-                                  @dd($order->products);
                                     @foreach($order->products as $product)
                                         <?php
                                             $percDiscount= $product->discount/100;

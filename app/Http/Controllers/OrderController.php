@@ -8,6 +8,8 @@ use App\Models\Order;
 
 use App\Models\OrderProduct;
 
+use DB;
+
 class OrderController extends Controller
 {
     /**
@@ -17,9 +19,10 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
+
         $perPage= request('perPage') ? request('perPage') : 2;
 
-        $orders= Order::when(request('search'), function ($query){
+        $orders= Order::without('user')->when(request('search'), function ($query){
             $query->whereHas('user', function($user) {
                 $user->where('email', 'LIKE', '%'.request('search').'%');
             })
@@ -29,24 +32,26 @@ class OrderController extends Controller
             ->orWhere('status', 'LIKE', '%'.request('search').'%');
         })
         ->when(request('column'), function($order){
-            $order->setEagerLoads([])->join(
+            $order->join(
                 'users', 'orders.user_id','=','users.id'
-            )->join(
-                'order_product', 'order_product.order_id','=','orders.id'
-            )->join(
-                'products', 'order_product.product_id','=','products.id'
-            );
+            )->select('orders.*','users.email');
 
             switch(request('column')){
                 case 'email':
                     $order->orderBy('users.email', request('type'));
                     break;
+                case 'data':
+                    $order->orderBy('orders.created_at', request('type'));
+                    break;
+                case 'stato':
+                    $order->orderBy('orders.status', request('type'));
+                    break;
                 default:
-                    return null;
+                    return $order;
             }
         })
         ->paginate($perPage)->withQueryString();
-
+         
       
         return view('gest_orders')->with([
             'orders'=> $orders,
