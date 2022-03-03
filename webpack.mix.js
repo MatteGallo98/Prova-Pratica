@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+const path = require("path");
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -14,6 +14,9 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
 .webpackConfig({
   output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
+})
+.alias({
+  ziggy: path.resolve('vendor/tightenco/ziggy/dist/vue')
 })
 .vue()
 .css('resources/css/style.css', 'public/css')

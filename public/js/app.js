@@ -24689,7 +24689,11 @@ _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__.InertiaProgress.init();
       render: function render() {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)(App, props);
       }
-    }).use(plugin).use(vue_axios__WEBPACK_IMPORTED_MODULE_4__["default"], (axios__WEBPACK_IMPORTED_MODULE_3___default())).mount(el);
+    }).use(plugin).use(vue_axios__WEBPACK_IMPORTED_MODULE_4__["default"], (axios__WEBPACK_IMPORTED_MODULE_3___default())).mixin({
+      methods: {
+        route: route
+      }
+    }).mount(el);
   }
 });
 
@@ -52607,6 +52611,22 @@ var map = {
 	"./shared/Button.vue": [
 		"./resources/js/Pages/shared/Button.vue",
 		"resources_js_Pages_shared_Button_vue"
+	],
+	"./shared/SelectorPage": [
+		"./resources/js/Pages/shared/SelectorPage.vue",
+		"resources_js_Pages_shared_SelectorPage_vue"
+	],
+	"./shared/SelectorPage.vue": [
+		"./resources/js/Pages/shared/SelectorPage.vue",
+		"resources_js_Pages_shared_SelectorPage_vue"
+	],
+	"./shared/navbar": [
+		"./resources/js/Pages/shared/navbar.vue",
+		"resources_js_Pages_shared_navbar_vue"
+	],
+	"./shared/navbar.vue": [
+		"./resources/js/Pages/shared/navbar.vue",
+		"resources_js_Pages_shared_navbar_vue"
 	]
 };
 function webpackAsyncContext(req) {
@@ -52752,7 +52772,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Index_vue":"693809a292c46ae5","resources_js_Pages_Layout_vue":"cb8007c96f2f9ee6","resources_js_Pages_X_vue":"004a7cd5dcca80d9","resources_js_Pages_shared_Button_vue":"ff264e0dabead9bc"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Index_vue":"66370e14a45d31e8","resources_js_Pages_Layout_vue":"6465c60876bfc149","resources_js_Pages_X_vue":"004a7cd5dcca80d9","resources_js_Pages_shared_Button_vue":"ff264e0dabead9bc","resources_js_Pages_shared_SelectorPage_vue":"19dce576f46a19dc","resources_js_Pages_shared_navbar_vue":"2228248c80c230ff"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

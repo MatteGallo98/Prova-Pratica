@@ -20,6 +20,7 @@ createInertiaApp({
     createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(VueAxios, axios)
+      .mixin({methods: {route}})
       .mount(el)
   },
 });

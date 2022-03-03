@@ -1,57 +1,61 @@
 <template>
   <app-layout >
-    <div class="container">
-        <input type="text" v-model="buttonText" />
-      <div
-        class="prodDiv col-3"
-        v-for="(product, index) in pinco.data"
-        :key="index"
-      >
-        <div class="typeProduct">
-          <h2 class="type">
-            {{ product.PS === 0 ? "Prodotto" : "Servizio" }}
-            <span class="dataProd">({{ product.created_at }})</span>
-          </h2>
+    <div >
+     <div class="SplashPage">
+            <div class="testoSplash">
+                <h2> Compra quello che vuoi. Quando vuoi</h2>
+            </div>
         </div>
-        <h2 class="titleProd">{{ product.name }}</h2>
-        <p class="descProd">
-          {{ product.description
-          }}{{
-            product.PS === 0
-              ? " di cui rimangono solo " + product.availability + " pezzi"
-              : ""
-          }}
-        </p>
-        <p class="Price" v-if="product.stringDiscount !== undefined">
-          {{
-            product.cost +
-            product.measure +
-            " con sconto pari al " +
-            product.discount +
-            "% per un complessivo di " +
-            product.stringDiscount
-          }}
-        </p>
-      </div>
-      <Link href="/x">X</Link>
-      <p :key="key">
-        {{standardObject.provincia}}  
-      </p>
-      <standard-button :text="buttonText" @clicked="updateStandardObject" />
-    </div>
+        <SelectorPage :perPage="perPage" :numberOfItems="numberOfItems" />
+        <div class="productList row justify-start">
+            <div
+              class="prodDiv col-3"
+              v-for="(product, index) in pinco.data"
+              :key="index"
+            >
+              <div class="typeProduct">
+                <h2 class="type">
+                  {{ product.PS === 0 ? "Prodotto" : "Servizio" }}
+                  <span class="dataProd">({{ product.created_at }})</span>
+                </h2>
+              </div>
+              <h2 class="titleProd">{{ product.name }}</h2>
+              <p class="descProd">
+                {{ product.description
+                }}{{
+                  product.PS === 0
+                    ? " di cui rimangono solo " + product.availability + " pezzi"
+                    : ""
+                }}
+              </p>
+              <p class="Price" v-if="product.stringDiscount !== undefined">
+                {{
+                  product.cost +
+                  product.measure +
+                  " con sconto pari al " +
+                  product.discount +
+                  "% per un complessivo di " +
+                  product.stringDiscount
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
   </app-layout>
 </template>
 
 <script>
 import Layout from "./Layout";
 import StandardButton from "./shared/Button";
+import SelectorPage from './shared/SelectorPage';
 import {Link} from '@inertiajs/inertia-vue3';
 
 export default {
   components: {
     "app-layout": Layout,
     "standard-button": StandardButton,
-    Link
+    Link,
+    SelectorPage
   },
   data() {
     return {
@@ -61,7 +65,8 @@ export default {
       standardObject: [{
           nome: 'Pippo',
           cognome: 'Franco'
-      }]
+      }],
+      numberOfItems: [1,10,15,20,25]
     };
   },
   props: {
