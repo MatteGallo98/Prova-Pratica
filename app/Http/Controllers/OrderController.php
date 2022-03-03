@@ -91,42 +91,45 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-
-        $validated = $request->validate([
+        $request->validate([
             'status' => 'required|string',
             'user_id' => 'required|integer',
-            "product.*"  => "required|string",
+            'product'=> 'required|array',
+            'amount'=>  'required|array',
+            "product.*"  => "required|integer|exists:\App\Models\Product,id",
             "amount.*"  => "nullable|integer|min:1",
         ]);
         
-        $order= Order::create([
-            'status' => $request->status,
-            'user_id' => $request->user_id,
-        ]);
-        $products=$request->product;
-        $i=0;
         $finalprice= 0.00;
         $finaldisprice=0.00;
 
-        foreach($products as $product){
-            if(isset($request->amount[$i])){
-                $currentProd=Product::find($product);
-                $finalprice+= $currentProd->cost*$request->amount[$i];
-                $finaldisprice+=($currentProd->cost-($currentProd->cost * $currentProd->discount/100 )) * $request->amount[$i];
+        $products=collect($request->product)->filter(function ($product, $key) use ($request){
+            return (int)$request->amount[$key];
+        });
 
-                $insertOrderProd= DB::table('order_product')->insert([
-                'order_id'=> $order->id,
-                'product_id'=>$product,
-                'amount'=>$request->amount[$i]
-                ]);
+        $selectedProducts= Product::whereIn('id', $products)->get()->keyBy('id');
+
+        $products= $products->map(function ( $product, $key) use ($request, &$finaldisprice, &$finalprice, $selectedProducts){
+            $finalprice+= $selectedProducts[$product]->cost*$request->amount[$key];
+            $finaldisprice+=($selectedProducts[$product]->cost-($selectedProducts[$product]->cost * $selectedProducts[$product]->discount/100 )) * $request->amount[$key];
+
+            return [
+                $product => ['amount'=> $request->amount[$key]]
+            ];
+        })->mapWithKeys(
+            function ($product){
+                return $product;
             }
-           $i+=1;
-        }
+        );
 
-        Order::where('id', $order->id)->update([
+        $order= Order::create([
+            'status' => $request->status,
+            'user_id' => $request->user_id,
             'final_price'=>$finalprice,
             'final_discount_price'=>$finaldisprice
         ]);
+       
+        $order->products()->sync($products);
 
         return redirect()->route('gest_ordini');
 

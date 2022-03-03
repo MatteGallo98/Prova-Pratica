@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/x', 'HomeController@shoppingIndex');
+
 Route::get('/', 'HomeController@index')->name('homepage');
+
+Route::post('/shopping', 'ShoppingController@store')->name('shopping');
 
 
 Route::get('/login', function () {

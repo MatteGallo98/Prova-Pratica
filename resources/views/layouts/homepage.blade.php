@@ -66,6 +66,29 @@
                     @endforeach
                     </select>
                 </div>   
+
+                <div class="search">
+                    <form action="{{route('homepage')}}">
+                        <select name="column" id="columnField" class="form-select" onchange="changeFunc();">
+                            @php
+                                $columnOrders= [
+                                    'Nome Prodotto'=> 'nome',
+                                    'Prezzo'=>'prezzo',
+                                    'Sconto'=>'sconto'
+                                ];
+                            @endphp
+                            @foreach($columnOrders as $name => $campo)
+                                @if($name==$order )
+                                    <option value="{{$pageOption}}" selected>{{$pageOption}}</option>
+                                @else
+                                    <option value="{{$pageOption}}">{{$pageOption}}</option>
+                                @endif
+                                
+                        @endforeach
+                        </select>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </form>
+                </div>
                 
                 <div class="rightContent col-sm">
                     <div class="search">

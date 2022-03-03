@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class HomeController extends Controller
 {
+    public function shoppingIndex()
+    {
+        return \Inertia\Inertia::render('X')->with([
+            'prodotti'=> \App\Models\Shopping::get()
+        ]);
+    }
 
     public function index()
     {
@@ -36,12 +43,11 @@ class HomeController extends Controller
             $order->orderBy('created_at', 'DESC');
         })
         ->paginate($perPage)->withQueryString();
-         
-        return view('child')->with([
+
+        return Inertia::render('Index')->with([
             'products'=> $products,
             'perPage'=>$perPage
         ]);
-
     }
 
 }
