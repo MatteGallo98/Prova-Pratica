@@ -11,6 +11,8 @@ use App\Models\User;
 
 use App\Models\Product;
 
+use Inertia\Inertia;
+
 use DB;
 
 class OrderController extends Controller
@@ -23,7 +25,8 @@ class OrderController extends Controller
     public function index(Request $request)
     {
 
-        $perPage= request('perPage') ? request('perPage') : 2;
+        $perPage= request('perPage') ? request('perPage') : 5;
+        $search = request('search') ? request('search') : '';
 
         $orders= Order::without('user')->join(
                 'users', 'orders.user_id','=','users.id')->
@@ -61,9 +64,24 @@ class OrderController extends Controller
         ->paginate($perPage)->withQueryString();
          
       
-        return view('gest_orders')->with([
-            'orders'=> $orders,
-            'perPage'=>$perPage
+        return Inertia::render('Gest_Table')->with([
+            'data'=> [
+                'orders'=> $orders,
+                'perPage'=> $perPage,
+                'mainRoute' => 'gest_ordini',
+                'addRoute' => 'order.create',
+                'columnsHead'=> [
+                    'Email Utente'=>'email',
+                    'Prodotti'=>'prod',
+                    'Stato Ordine'=>'stato',
+                    'Data ordine'=>'data',
+                    'Prezzo Finale'=>'prezzo',
+                    'Prezzo Finale Scontato' => 'pfs'
+                ]
+            ],
+            'table_type'=> 'orders',
+            'title' => 'Ordini',
+            'search'=> $search
         ]);
     }
 

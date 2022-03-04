@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Inertia\Inertia;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +21,7 @@ Route::post('/shopping', 'ShoppingController@store')->name('shopping');
 
 
 Route::get('/login', function () {
-    return view('login');
+    return Inertia::render('Login');
 } )->middleware(['guest'])->name('login');
 
 Route::get('/gest_utenti', 'UserController@index')->middleware(['auth'])->name('gest_utenti');

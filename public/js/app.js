@@ -52580,6 +52580,14 @@ function compileToFunction(template, options) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./Gest_Table": [
+		"./resources/js/Pages/Gest_Table.vue",
+		"resources_js_Pages_Gest_Table_vue"
+	],
+	"./Gest_Table.vue": [
+		"./resources/js/Pages/Gest_Table.vue",
+		"resources_js_Pages_Gest_Table_vue"
+	],
 	"./Index": [
 		"./resources/js/Pages/Index.vue",
 		"resources_js_Pages_Index_vue"
@@ -52596,6 +52604,14 @@ var map = {
 		"./resources/js/Pages/Layout.vue",
 		"resources_js_Pages_Layout_vue"
 	],
+	"./Login": [
+		"./resources/js/Pages/Login.vue",
+		"resources_js_Pages_Login_vue"
+	],
+	"./Login.vue": [
+		"./resources/js/Pages/Login.vue",
+		"resources_js_Pages_Login_vue"
+	],
 	"./X": [
 		"./resources/js/Pages/X.vue",
 		"resources_js_Pages_X_vue"
@@ -52603,6 +52619,30 @@ var map = {
 	"./X.vue": [
 		"./resources/js/Pages/X.vue",
 		"resources_js_Pages_X_vue"
+	],
+	"./gest/Ordini": [
+		"./resources/js/Pages/gest/Ordini.vue",
+		"resources_js_Pages_gest_Ordini_vue"
+	],
+	"./gest/Ordini.vue": [
+		"./resources/js/Pages/gest/Ordini.vue",
+		"resources_js_Pages_gest_Ordini_vue"
+	],
+	"./gest/Prodotti": [
+		"./resources/js/Pages/gest/Prodotti.vue",
+		"resources_js_Pages_gest_Prodotti_vue"
+	],
+	"./gest/Prodotti.vue": [
+		"./resources/js/Pages/gest/Prodotti.vue",
+		"resources_js_Pages_gest_Prodotti_vue"
+	],
+	"./gest/Utenti": [
+		"./resources/js/Pages/gest/Utenti.vue",
+		"resources_js_Pages_gest_Utenti_vue"
+	],
+	"./gest/Utenti.vue": [
+		"./resources/js/Pages/gest/Utenti.vue",
+		"resources_js_Pages_gest_Utenti_vue"
 	],
 	"./shared/Button": [
 		"./resources/js/Pages/shared/Button.vue",
@@ -52635,6 +52675,14 @@ var map = {
 	"./shared/searchAndReload.vue": [
 		"./resources/js/Pages/shared/searchAndReload.vue",
 		"resources_js_Pages_shared_searchAndReload_vue"
+	],
+	"./shared/thTable": [
+		"./resources/js/Pages/shared/thTable.vue",
+		"resources_js_Pages_shared_thTable_vue"
+	],
+	"./shared/thTable.vue": [
+		"./resources/js/Pages/shared/thTable.vue",
+		"resources_js_Pages_shared_thTable_vue"
 	]
 };
 function webpackAsyncContext(req) {
@@ -52780,7 +52828,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Index_vue":"7fda61e13df8c7ba","resources_js_Pages_Layout_vue":"6465c60876bfc149","resources_js_Pages_X_vue":"004a7cd5dcca80d9","resources_js_Pages_shared_Button_vue":"ff264e0dabead9bc","resources_js_Pages_shared_SelectorPage_vue":"19dce576f46a19dc","resources_js_Pages_shared_navbar_vue":"2228248c80c230ff","resources_js_Pages_shared_searchAndReload_vue":"7706ca30057eb99d"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Gest_Table_vue":"bdf71cad4ef3227f","resources_js_Pages_Index_vue":"8ea1b4e70d7bc1ee","resources_js_Pages_Layout_vue":"6465c60876bfc149","resources_js_Pages_Login_vue":"b075def666e3f6d1","resources_js_Pages_X_vue":"004a7cd5dcca80d9","resources_js_Pages_gest_Ordini_vue":"bb831e7b56e363b1","resources_js_Pages_gest_Prodotti_vue":"b80fff7430f1a3fc","resources_js_Pages_gest_Utenti_vue":"4a7df6c76449cbc4","resources_js_Pages_shared_Button_vue":"ff264e0dabead9bc","resources_js_Pages_shared_SelectorPage_vue":"19dce576f46a19dc","resources_js_Pages_shared_navbar_vue":"2228248c80c230ff","resources_js_Pages_shared_searchAndReload_vue":"7706ca30057eb99d","resources_js_Pages_shared_thTable_vue":"7029dc578c0f2a2c"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

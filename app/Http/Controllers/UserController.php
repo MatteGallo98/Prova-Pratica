@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
 
 class UserController extends Controller
 {
@@ -29,7 +30,8 @@ class UserController extends Controller
             'ind'=>'address'
         ];
 
-        $perPage= request('perPage') ? request('perPage') : 2;
+        $perPage= request('perPage') ? request('perPage') : 5;
+        $search = request('search') ? request('search') : '';
 
         $users = User::when(request('search'), function($query) {
             $query->where(
@@ -44,9 +46,24 @@ class UserController extends Controller
         })
         ->paginate($perPage)->withQueryString();
 
-        return view('gest_utenti')->with([
-            'users'=> $users,
-            'perPage'=>$perPage
+        return Inertia::render('Gest_Table')->with([
+            'data'=> [
+                'users'=> $users,
+                'perPage'=> $perPage,
+                'mainRoute' => 'gest_utenti',
+                'addRoute' => 'user.create',
+                'columnsHead'=> [
+                    'Tipo Utente'=>'tipo',
+                    'Nome Utente'=>'nome',
+                    'Azienda'=>'azienda',
+                    'Email'=>'email',
+                    'Telefono'=>'tel',
+                    'Indirizzo'=>'ind'
+                ]
+            ],
+            'table_type'=> 'users',
+            'title' => 'Utenti',
+            'search'=> $search
         ]);
     }
 
@@ -162,7 +179,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
         User::find($id)->delete();
         echo ("Utente cancellato con successo.");
         return redirect()->route('gest_utenti');

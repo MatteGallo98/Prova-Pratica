@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Validation\Rule;
 
+use Inertia\Inertia;
+
 class ProductController extends Controller
 {
     /**
@@ -26,7 +28,8 @@ class ProductController extends Controller
             'sconto'=>'discount'
         ];
 
-        $perPage= request('perPage') ? request('perPage') : 2;
+        $perPage= request('perPage') ? request('perPage') : 5;
+        $search = request('search') ? request('search') : '';
 
         $products = Product::when(request('search'), function($query) {
             $query->where(
@@ -41,9 +44,25 @@ class ProductController extends Controller
         })
         ->paginate($perPage)->withQueryString();
 
-        return view('gest_products')->with([
-            'products'=> $products,
-            'perPage'=>$perPage
+        return Inertia::render('Gest_Table')->with([
+            'data'=> [
+                'products'=> $products,
+                'perPage'=> $perPage,
+                'mainRoute' => 'gest_prodotti',
+                'addRoute' => 'product.create',
+                'columnsHead'=> [
+                    'Nome Prodotto/Servizio'=>'nome',
+                    'Descrizione'=>'descrizione',
+                    'Tipo'=>'tipo',
+                    'Disponibilità'=>'dispobilita',
+                    'Costo'=>'costo',
+                    'Unita di misura'=>'unitadimisura',
+                    'Sconto'=>'sconto'
+                ]
+            ],
+            'table_type'=> 'products',
+            'title' => 'Prodotti',
+            'search'=> $search
         ]);
     }
 

@@ -49,7 +49,7 @@
               <div class="typeProduct">
                 <h2 class="type">
                   {{ product.PS === 0 ? "Prodotto" : "Servizio" }}
-                  <span class="dataProd">({{ product.created_at }})</span>
+                  <span class="dataProd">({{ format_date(product.created_at) }})</span>
                 </h2>
               </div>
               <h2 class="titleProd">{{ product.name }}</h2>
@@ -83,6 +83,7 @@ import StandardButton from "./shared/Button";
 import SelectorPage from './shared/SelectorPage';
 import {Link} from '@inertiajs/inertia-vue3';
 import SearchAndReload from './shared/searchAndReload';
+import moment from 'moment'
 
 export default {
   components: {
@@ -136,6 +137,11 @@ export default {
     },
     getMeasure(product) {
       return product.measure;
+    },
+    format_date(value){
+          if (value) {
+              return moment(String(value)).format('DD MM YYYY')
+          }
     },
   },
 };
