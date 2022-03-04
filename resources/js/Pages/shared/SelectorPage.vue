@@ -1,10 +1,8 @@
 <template>
     <div class="selectPagination col-sm">
         <label for="pageNumber" class="control-label labelPage"> Elementi per pagina: </label>
-        <select name="pageNumber" id="pageNumber" class="form-select" @change="changeFunc();" v-model="currentPage">
-           
-            <option :value="numberOfItem" v-for="(numberOfItem, key) in numberOfItems" :key="key">{{numberOfItem}}</option>
-               
+        <select name="pageNumber" id="pageNumber" class="form-select" @change="changeFunc();" v-model="currentPage">         
+            <option :value="numberOfItem" v-for="(numberOfItem, key) in numberOfItems" :key="key">{{numberOfItem}}</option>             
         </select>
     </div>   
 </template>

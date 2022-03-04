@@ -21,12 +21,17 @@ class HomeController extends Controller
             'descrizione'=>'description',
             'tipo'=>'PS',
             'disponibilita'=>'	availability',
-            'costo'=>'cost',
+            'prezzo'=>'cost',
             'unitadimisura'=>'measure',
-            'sconto'=>'discount'
+            'sconto'=>'discount',
+            'data' => 'created_at'
         ];
 
         $perPage= request('perPage') ? request('perPage') : 25;
+        $column = request('column') ? request('column') : 'data';
+        $type = request('type') ? request('type') : 'ASC';
+        $filter= request('filter') ? request('filter') : '';
+        $search = request('search') ? request('search') : '';
 
         $products = Product::when(request('search'), function($query) {
             $query->where(
@@ -34,6 +39,11 @@ class HomeController extends Controller
             )
             ->orWhere(
                 'description', 'LIKE', '%'.request('search').'%'
+            );
+        })
+        ->when(request('filter'), function($query){
+            $query->where(
+                'PS', '=', request('filter')
             );
         })
         ->when(request('column'), function($query) use ($columnsHead) {
@@ -46,7 +56,11 @@ class HomeController extends Controller
 
         return Inertia::render('Index')->with([
             'products'=> $products,
-            'perPage'=>$perPage
+            'perPage'=>$perPage,
+            'filter' => $filter,
+            'column' => $column,
+            'type' => $type,
+            'search'=> $search
         ]);
     }
 

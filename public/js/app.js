@@ -52627,6 +52627,14 @@ var map = {
 	"./shared/navbar.vue": [
 		"./resources/js/Pages/shared/navbar.vue",
 		"resources_js_Pages_shared_navbar_vue"
+	],
+	"./shared/searchAndReload": [
+		"./resources/js/Pages/shared/searchAndReload.vue",
+		"resources_js_Pages_shared_searchAndReload_vue"
+	],
+	"./shared/searchAndReload.vue": [
+		"./resources/js/Pages/shared/searchAndReload.vue",
+		"resources_js_Pages_shared_searchAndReload_vue"
 	]
 };
 function webpackAsyncContext(req) {
@@ -52772,7 +52780,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Index_vue":"66370e14a45d31e8","resources_js_Pages_Layout_vue":"6465c60876bfc149","resources_js_Pages_X_vue":"004a7cd5dcca80d9","resources_js_Pages_shared_Button_vue":"ff264e0dabead9bc","resources_js_Pages_shared_SelectorPage_vue":"19dce576f46a19dc","resources_js_Pages_shared_navbar_vue":"2228248c80c230ff"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Index_vue":"7fda61e13df8c7ba","resources_js_Pages_Layout_vue":"6465c60876bfc149","resources_js_Pages_X_vue":"004a7cd5dcca80d9","resources_js_Pages_shared_Button_vue":"ff264e0dabead9bc","resources_js_Pages_shared_SelectorPage_vue":"19dce576f46a19dc","resources_js_Pages_shared_navbar_vue":"2228248c80c230ff","resources_js_Pages_shared_searchAndReload_vue":"7706ca30057eb99d"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

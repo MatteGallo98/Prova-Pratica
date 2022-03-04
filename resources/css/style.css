@@ -8,6 +8,19 @@
     justify-content: end;
 }
 
+
+ .inputContainer {
+    width: 100%;
+    margin-bottom: 10px;
+ }
+ .icon {
+    padding: 10px;
+    color: rgb(49, 0, 128);
+    text-align: left;
+    border: 1px solid #ced4da;
+    line-height: 1.6;
+ }
+
 .navbar{
    padding-left: 10px!important;
    padding-right: 10px!important;
@@ -41,7 +54,6 @@
 }
 
 .rightContent{
-    display: flex;
     justify-content: end;
     text-align: right;
     margin-right:10px;
@@ -87,9 +99,12 @@ input[type=checkbox]{
 }
 
 .selectPagination{
-    margin-top: 10px;
+    width: fit-content;
 }
 
+.radioService{
+    margin-right:3px;
+}
 
 table {
     border-collapse: collapse;
@@ -109,6 +124,7 @@ tbody, tr, th{
 
 .toolbar{
     margin-top: 1%!important;
+   
 }
 
 .dataProd{
