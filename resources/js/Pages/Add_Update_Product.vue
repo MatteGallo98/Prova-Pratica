@@ -59,6 +59,10 @@ import lib from '../shareJs/lib';
 export default {
  mounted(){
        lib.nodoControl("PS", this.productUpdate);
+       if(!this.productUpdate){
+           this.prod.measure= this.options[0];
+       }
+       
     },
   components:{
       'app-layout': Layout
@@ -77,7 +81,7 @@ export default {
             'PS': this.productUpdate ? this.productUpdate.PS : '0',
             'availability' : this.productUpdate ? this.productUpdate.availability : null,
             'cost' : this.productUpdate ? this.productUpdate.cost : null,
-            'measure' : this.productUpdate ? this.productUpdate.measure : "€/unità",
+            'measure' : this.productUpdate ? this.productUpdate.measure : '',
             'discount' : this.productUpdate ? this.productUpdate.discount : null,
           }
       }       

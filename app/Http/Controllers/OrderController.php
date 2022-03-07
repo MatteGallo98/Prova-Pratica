@@ -15,6 +15,7 @@ use Inertia\Inertia;
 
 use DB;
 
+
 class OrderController extends Controller
 {
     /**
@@ -95,7 +96,7 @@ class OrderController extends Controller
         $users=User::get();
         $products=Product::get();
 
-        return view('order')->with([
+        return Inertia::render('Add_Update_Order')->with([
             'users'=>$users,
             'products'=>$products
         ]);
@@ -172,7 +173,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        return view('order')->with('order', Order::where('id', $id)->first());
+        return Inertia::render('Add_Update_Order')->with('orderUpdate', Order::where('id', $id)->first());
     }
 
     /**
