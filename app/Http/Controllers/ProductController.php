@@ -128,7 +128,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return Inertia::render('Add_Update_Product')->with('product', Product::where('id', $id)->first());
+        return Inertia::render('Add_Update_Product')->with('productUpdate', Product::where('id', $id)->first());
     }
 
     /**

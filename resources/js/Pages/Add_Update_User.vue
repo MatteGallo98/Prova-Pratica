@@ -62,16 +62,13 @@
 
 <script>
 import Layout from './Layout';
+import lib from '../shareJs/lib';
 
 export default {
  mounted(){
         console.log(this.$page.props.errors);
         console.log(this.userUpdate);
-        if(this.userUpdate && this.userUpdate.admin==1){
-            var nodoAdmin=document.getElementById("admin");
-            nodoAdmin.value='1';
-            nodoAdmin.checked= true;
-        }
+        lib.nodoControl("admin", this.userUpdate);
     },
   components:{
       'app-layout': Layout
@@ -85,7 +82,7 @@ export default {
           utente: {
             'name': this.userUpdate ? this.userUpdate.name : null,
             'agency_name': this.userUpdate ? this.userUpdate.agency_name : null,
-            'address': this.userUpdate ? this.userUpdate.agency_name : null,
+            'address': this.userUpdate ? this.userUpdate.address : null,
             'phone' : this.userUpdate ? this.userUpdate.phone : null,
             'email' : this.userUpdate ? this.userUpdate.email : null,
             'admin' : this.userUpdate ? this.userUpdate.admin : '0',
@@ -103,16 +100,7 @@ export default {
          }
       },
       changeValue(event){
-          var nodoCheckbox = document.getElementById(event.target.id);
-          console.log(nodoCheckbox.value);
-          if(nodoCheckbox.value==1){
-              this.utente.admin='0';
-              nodoCheckbox.value=0;
-          }else{
-              this.utente.admin='1';
-              nodoCheckbox.value=1;
-          }
-          console.log(this.utente);
+          lib.changeValue(event, this.utente);
       }
   }
 }

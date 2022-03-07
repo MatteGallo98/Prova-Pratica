@@ -12,17 +12,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Layout */ "./resources/js/Pages/Layout.vue");
+/* harmony import */ var _shareJs_lib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shareJs/lib */ "./resources/js/shareJs/lib.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     console.log(this.$page.props.errors);
     console.log(this.userUpdate);
-
-    if (this.userUpdate && this.userUpdate.admin == 1) {
-      var nodoAdmin = document.getElementById("admin");
-      nodoAdmin.value = '1';
-      nodoAdmin.checked = true;
-    }
+    _shareJs_lib__WEBPACK_IMPORTED_MODULE_1__["default"].nodoControl("admin", this.userUpdate);
   },
   components: {
     'app-layout': _Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -36,7 +33,7 @@ __webpack_require__.r(__webpack_exports__);
       utente: {
         'name': this.userUpdate ? this.userUpdate.name : null,
         'agency_name': this.userUpdate ? this.userUpdate.agency_name : null,
-        'address': this.userUpdate ? this.userUpdate.agency_name : null,
+        'address': this.userUpdate ? this.userUpdate.address : null,
         'phone': this.userUpdate ? this.userUpdate.phone : null,
         'email': this.userUpdate ? this.userUpdate.email : null,
         'admin': this.userUpdate ? this.userUpdate.admin : '0',
@@ -56,18 +53,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     changeValue: function changeValue(event) {
-      var nodoCheckbox = document.getElementById(event.target.id);
-      console.log(nodoCheckbox.value);
-
-      if (nodoCheckbox.value == 1) {
-        this.utente.admin = '0';
-        nodoCheckbox.value = 0;
-      } else {
-        this.utente.admin = '1';
-        nodoCheckbox.value = 1;
-      }
-
-      console.log(this.utente);
+      _shareJs_lib__WEBPACK_IMPORTED_MODULE_1__["default"].changeValue(event, this.utente);
     }
   }
 });
@@ -477,6 +463,42 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, "Logout")])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])]);
 }
+
+/***/ }),
+
+/***/ "./resources/js/shareJs/lib.js":
+/*!*************************************!*\
+  !*** ./resources/js/shareJs/lib.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var lib = {
+  changeValue: function changeValue(event, formData) {
+    var nodoCheckbox = document.getElementById(event.target.id);
+    console.log(nodoCheckbox.value);
+
+    if (nodoCheckbox.value == 1) {
+      formData[event.target.id] = '0';
+      nodoCheckbox.value = 0;
+    } else {
+      formData[event.target.id] = '1';
+      nodoCheckbox.value = 1;
+    }
+
+    console.log(formData);
+  },
+  nodoControl: function nodoControl(id, updateData) {
+    if (updateData && updateData[id] == 1) {
+      var nodo = document.getElementById(id);
+      nodo.click();
+    }
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (lib);
 
 /***/ }),
 

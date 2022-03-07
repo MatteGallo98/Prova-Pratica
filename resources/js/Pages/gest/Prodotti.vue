@@ -7,7 +7,7 @@
         <td>{{product.availability}}</td>
         <td>{{product.cost}}</td>
         <td>{{product.measure}}</td>
-        <td>{{product.discount}}</td>
+        <td>{{product.discount ? product.discount+"%" : '' }}</td>
         <td><Link :href="route('product.edit', {'id': product.id})">Modifica</Link></td>
         <td>
                     <input type="submit" value="Cancella" class="buttonSubmit" @click="cancella(product.id)">
