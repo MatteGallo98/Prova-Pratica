@@ -27,7 +27,8 @@ __webpack_require__.r(__webpack_exports__);
     cancella: function cancella(id) {
       console.log(id);
       this.$inertia.post(route('user.destroy', {
-        'id': id
+        'id': id,
+        'perPage': this.data.perPage
       }));
     }
   }

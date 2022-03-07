@@ -221,7 +221,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     routeEnd: String,
-    search: String
+    search: String,
+    perPage: Number
   },
   data: function data() {
     return {
@@ -763,7 +764,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.text]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     "class": "btn btn-primary reload",
-    href: _ctx.route($props.routeEnd)
+    href: _ctx.route($props.routeEnd, {
+      'perPage': $props.perPage
+    })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_6];

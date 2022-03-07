@@ -18,9 +18,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
         $columnsHead = [
             'tipo'=>'admin',
             'nome'=>'name',
@@ -179,11 +178,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $perPage)
     {
         User::find($id)->delete();
         echo ("Utente cancellato con successo.");
-        return redirect()->route('gest_utenti');
+        return redirect()->route('gest_utenti', [
+            'perPage'=> $perPage 
+        ]);
     }
 
 }

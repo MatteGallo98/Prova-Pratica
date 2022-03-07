@@ -36,7 +36,7 @@ Route::get('/utente/{id}', 'UserController@edit')->middleware(['auth'])->name('u
 
 Route::post('/utente/{id}/edit', 'UserController@update')->middleware(['auth'])->name('user.update');
 
-Route::post('/utente/{id}/destroy', 'UserController@destroy')->middleware(['auth'])->name('user.destroy');
+Route::post('/utente/{id}/destroy/{perPage}', 'UserController@destroy')->middleware(['auth'])->name('user.destroy');
 
 //gestione prodotti
 
@@ -50,7 +50,7 @@ Route::get('/prodotto/{id}', 'ProductController@edit')->middleware(['auth'])->na
 
 Route::post('/prodotto/{id}/edit', 'ProductController@update')->middleware(['auth'])->name('product.update');
 
-Route::post('/prodotto/{id}/destroy', 'ProductController@destroy')->middleware(['auth'])->name('product.destroy');
+Route::post('/prodotto/{id}/destroy/{perPage}', 'ProductController@destroy')->middleware(['auth'])->name('product.destroy');
 
 //gestione ordini
 
@@ -64,7 +64,7 @@ Route::get('/ordine/{id}', 'OrderController@edit')->middleware(['auth'])->name('
 
 Route::post('/ordine/{id}/edit', 'OrderController@update')->middleware(['auth'])->name('order.update');
 
-Route::post('/ordine/{id}/destroy', 'OrderController@destroy')->middleware(['auth'])->name('order.destroy');
+Route::post('/ordine/{id}/destroy/{perPage}', 'OrderController@destroy')->middleware(['auth'])->name('order.destroy');
 
 
 require __DIR__.'/auth.php';

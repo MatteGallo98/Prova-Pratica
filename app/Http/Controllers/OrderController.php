@@ -25,7 +25,6 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-
         $perPage= request('perPage') ? request('perPage') : 5;
         $search = request('search') ? request('search') : '';
 
@@ -204,10 +203,12 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id, $perPage)
+    { 
         Order::where('id', $id)->firstorfail()->delete();
         echo ("Prodotto cancellato con successo.");
-        return redirect()->route('gest_ordini');
+        return redirect()->route('gest_utenti', [
+            'perPage'=> $perPage 
+        ]);
     }
 }

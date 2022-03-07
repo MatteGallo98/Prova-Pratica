@@ -253,7 +253,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         pattern: "[0-9]{7,9}",
         "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
           return $data.utente.phone = $event;
-        })
+        }),
+        required: ""
       }, null, 512
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.utente.phone]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  @error('phone')\r\n                        <div class=\"alert alert-danger\">{{ $message }}</div>\r\n                    @enderror")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {

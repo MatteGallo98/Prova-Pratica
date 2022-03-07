@@ -30,7 +30,8 @@ __webpack_require__.r(__webpack_exports__);
     cancella: function cancella(id) {
       console.log(id);
       this.$inertia.post(route('product.destroy', {
-        'id': id
+        'id': id,
+        'perPage': this.data.perPage
       }));
     },
     format_date: function format_date(value) {

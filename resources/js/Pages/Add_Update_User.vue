@@ -26,7 +26,7 @@
 
                 <div class="form-group">
                     <label for="phone">Telefono</label>
-                    <input type="tel" name="phone" class="form-control " id="phone" placeholder="Telefono" pattern="[0-9]{7,9}" v-model="utente.phone">
+                    <input type="tel" name="phone" class="form-control " id="phone" placeholder="Telefono" pattern="[0-9]{7,9}" v-model="utente.phone" required>
                    <!--  @error('phone')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror-->

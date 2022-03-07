@@ -31,7 +31,7 @@ export default {
     methods:{
         cancella(id){
             console.log(id);
-            this.$inertia.post(route('product.destroy', {'id': id}))
+            this.$inertia.post(route('product.destroy', {'id': id, 'perPage': this.data.perPage}))
         },
          format_date(value){
             if (value) {

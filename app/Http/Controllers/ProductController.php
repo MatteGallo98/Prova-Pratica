@@ -17,7 +17,6 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-
         $columnsHead = [
             'nome'=>'name',
             'descrizione'=>'description',
@@ -173,10 +172,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $perPage)
     {
         Product::where('id', $id)->firstorfail()->delete();
         echo ("Prodotto cancellato con successo.");
-        return redirect()->route('gest_prodotti');
+        return redirect()->route('gest_utenti', [
+            'perPage'=> $perPage 
+        ]);
     }
 }

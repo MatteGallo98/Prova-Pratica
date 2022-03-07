@@ -5,7 +5,7 @@
         </div>
         <div class = "row">
             <SelectorPage :perPage="data.perPage" :numberOfItems="numberOfItems" />
-            <SearchAndReload :routeEnd="data.mainRoute" :search="searchValue" />
+            <SearchAndReload :routeEnd="data.mainRoute" :search="searchValue"  :perPage="data.perPage"/>
             <div class="rightContent col-sm">
                 <a class="btn btn-primary" :href="route(data.addRoute)">Aggiungi {{titolo}}</a>
             </div>

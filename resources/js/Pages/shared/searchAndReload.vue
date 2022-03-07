@@ -6,7 +6,7 @@
                     <input type="text" id="search" placeholder="Cerca" name="search" class="searchInput Field" v-model="text" >
                 </div>
                 <div class="col">
-                  <Link class="btn btn-primary reload" :href="route(routeEnd)">Ricarica Pagina</Link>  
+                  <Link class="btn btn-primary reload" :href="route(routeEnd, {'perPage': perPage})">Ricarica Pagina</Link>  
                 </div>
             </div>        
      </div>
@@ -20,7 +20,8 @@ export default {
     },
     props: {
         routeEnd : String,
-        search: String
+        search: String,
+        perPage: Number
     },
     data(){
         return {

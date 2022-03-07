@@ -30,7 +30,7 @@ export default {
     methods:{
         cancella(id){
             console.log(id);
-            this.$inertia.post(route('user.destroy', {'id': id}))
+            this.$inertia.post(route('user.destroy', {'id': id, 'perPage': this.data.perPage}))
         }
     }
 }

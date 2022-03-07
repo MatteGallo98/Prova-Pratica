@@ -100,8 +100,10 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     cancella: function cancella(id) {
       console.log(id);
+      console.log(this.data.perPage);
       this.$inertia.post(route('order.destroy', {
-        'id': id
+        'id': id,
+        'perPage': this.data.perPage
       }));
     },
     format_date: function format_date(value) {
@@ -144,7 +146,8 @@ __webpack_require__.r(__webpack_exports__);
     cancella: function cancella(id) {
       console.log(id);
       this.$inertia.post(route('product.destroy', {
-        'id': id
+        'id': id,
+        'perPage': this.data.perPage
       }));
     },
     format_date: function format_date(value) {
@@ -184,7 +187,8 @@ __webpack_require__.r(__webpack_exports__);
     cancella: function cancella(id) {
       console.log(id);
       this.$inertia.post(route('user.destroy', {
-        'id': id
+        'id': id,
+        'perPage': this.data.perPage
       }));
     }
   }
@@ -276,7 +280,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     routeEnd: String,
-    search: String
+    search: String,
+    perPage: Number
   },
   data: function data() {
     return {
@@ -393,10 +398,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , ["perPage", "numberOfItems"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SearchAndReload, {
         routeEnd: $props.data.mainRoute,
-        search: $data.searchValue
+        search: $data.searchValue,
+        perPage: $props.data.perPage
       }, null, 8
       /* PROPS */
-      , ["routeEnd", "search"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+      , ["routeEnd", "search", "perPage"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
         "class": "btn btn-primary",
         href: _ctx.route($props.data.addRoute)
       }, "Aggiungi " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.titolo), 9
@@ -924,7 +930,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.text]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     "class": "btn btn-primary reload",
-    href: _ctx.route($props.routeEnd)
+    href: _ctx.route($props.routeEnd, {
+      'perPage': $props.perPage
+    })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_6];
