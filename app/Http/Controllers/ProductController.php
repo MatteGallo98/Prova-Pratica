@@ -73,7 +73,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product');
+        return Inertia::render('Add_Update_Product');
     }
 
     /**
@@ -128,7 +128,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return view('product')->with('product', Product::where('id', $id)->first());
+        return Inertia::render('Add_Update_Product')->with('product', Product::where('id', $id)->first());
     }
 
     /**

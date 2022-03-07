@@ -74,7 +74,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user');
+        return Inertia::render('Add_Update_User');
     }
 
     /**
@@ -94,6 +94,8 @@ class UserController extends Controller
             "password" => 'required',
             "admin" => 'boolean'
         ]);
+
+        
         
         User::create([
             'name'=>$request->name,
@@ -127,7 +129,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('user')->with('user', User::where('id', $id)->first());
+        return Inertia::render('Add_Update_User')->with('userUpdate', User::where('id', $id)->first());
     }
 
     /**
