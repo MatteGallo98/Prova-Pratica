@@ -26,6 +26,16 @@
    padding-right: 10px!important;
 }
 
+.AddCart{
+  margin-bottom: 10px;
+  width: 50%!important;
+  max-width: 50%!important;
+}
+
+.quantitaCar{
+    margin-bottom: 10px;
+}
+
 .SplashPage{
     background-image: url(/images/shop.jpg?cd0214c30615a68b379656d4c2fb2451);
     height: 500px;
