@@ -93,6 +93,9 @@ import SearchAndReload from "./shared/searchAndReload";
 import ProdElList from "./shared/ProdElList";
 
 export default {
+  mounted(){
+    console.log(this.products);
+  },
   components: {
     "app-layout": Layout,
     "standard-button": StandardButton,

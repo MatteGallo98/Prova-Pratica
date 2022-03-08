@@ -24,6 +24,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  mounted: function mounted() {
+    console.log(this.products);
+  },
   components: {
     "app-layout": _Layout__WEBPACK_IMPORTED_MODULE_0__["default"],
     "standard-button": _shared_Button__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -619,21 +622,26 @@ var _hoisted_5 = {
   "class": "titleProd"
 };
 var _hoisted_6 = {
+  key: 0,
+  "class": "presentationImage row"
+};
+var _hoisted_7 = ["src", "name"];
+var _hoisted_8 = {
   "class": "descProd"
 };
-var _hoisted_7 = {
+var _hoisted_9 = {
   "class": "Price"
 };
-var _hoisted_8 = {
-  key: 0,
+var _hoisted_10 = {
+  key: 1,
   "class": "row AddCart mt-auto mx-auto"
 };
-var _hoisted_9 = {
+var _hoisted_11 = {
   "class": "col"
 };
-var _hoisted_10 = ["max", "name", "id"];
+var _hoisted_12 = ["max", "name", "id"];
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "btn btn-primary"
 }, "Aggiungi al Carrello", -1
@@ -647,11 +655,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.name), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.description) + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.PS == 0 ? " di cui rimangono solo " + $props.product.availability + " pezzi" : ""), 1
+  ), $props.product.product_images.length !== 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.product.product_images, function (prod_image, key) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      "class": "col",
+      key: key
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      src: 'storage/images/' + prod_image.file_path,
+      name: prod_image.name,
+      width: "100"
+    }, null, 8
+    /* PROPS */
+    , _hoisted_7)]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.description) + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.PS == 0 ? " di cui rimangono solo " + $props.product.availability + " pezzi" : ""), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.cost + $props.product.measure + " con sconto pari al " + $props.product.discount + "% per un complessivo di " + $options.calculateDiscount($props.product)), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.cost + $props.product.measure + " con sconto pari al " + $props.product.discount + "% per un complessivo di " + $options.calculateDiscount($props.product)), 1
   /* TEXT */
-  ), _ctx.$page.props.user && !_ctx.$page.props.user.admin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  ), _ctx.$page.props.user && !_ctx.$page.props.user.admin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.addToCart && $options.addToCart.apply($options, arguments);
     }, ["prevent"]))
@@ -667,7 +688,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "form-control quantitaCar"
   }, null, 8
   /* PROPS */
-  , _hoisted_10), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.currentAmount]]), _hoisted_11], 32
+  , _hoisted_12), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.currentAmount]]), _hoisted_13], 32
   /* HYDRATE_EVENTS */
   )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }

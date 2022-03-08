@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Validation\Rule;
 
+use App\Models\ProductImage;
+
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -92,10 +94,12 @@ class ProductController extends Controller
             ],
             "cost" => 'required|regex:/^\d+(\.\d{1,2})?$/',
             "measure" => 'required|string',
-            "discount" => 'nullable|integer'
+            "discount" => 'nullable|integer',
+            'images' => 'nullable|array',
+            'images.*' => 'mimes:jpeg,bmp,png' 
         ]);
         
-        Product::create([
+       $product= Product::create([
             'name' => $request->name,
             'description' => $request->description,
             "PS" => ($request->PS === "1" ? 1 : 0),
@@ -104,6 +108,20 @@ class ProductController extends Controller
             "measure" => $request->measure,
             "discount" => $request->discount,
         ]);
+
+        if($request->hasfile('images'))
+         {
+            foreach($request->file('images') as $image)
+            {
+                $image->store('public/images'); 
+                
+                ProductImage::create([
+                    'name' => $image->getClientOriginalName(),
+                    "file_path" => $image->hashName(),
+                    'product_id'=> $product->id
+                ]);
+            }
+        }
 
         return redirect()->route('gest_prodotti');
     }
@@ -139,6 +157,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request);
         $validated = $request->validate([
             'name' => 'required|string',
             'description' => 'nullable|string',
@@ -148,7 +167,9 @@ class ProductController extends Controller
             ],
             "cost" => 'required|regex:/^\d+(\.\d{1,2})?$/',
             "measure" => 'required|string',
-            "discount" => 'nullable|integer'
+            "discount" => 'nullable|integer',
+            'images' => 'nullable|array',
+            'images.*' => 'mimes:jpeg,bmp,png' 
         ]);
 
          $product_inf = [

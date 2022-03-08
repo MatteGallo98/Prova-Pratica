@@ -41,7 +41,12 @@
                         <option value=""></option> 
                         <option :value="discount" v-for="(discount, key) in discounts" :key="key">{{discount+'%'}}</option>    
                     </select>
-                   
+                </div>
+
+                <div class="form-group">
+                    <label for="images">Immagini</label>
+                    <input type="file" id="images" name="images" class="form-control" aria-label="Default select example" multiple @change="onChange">
+                       
                 </div>
 
                 <button type="submit" class="btn btn-primary buttonLogin">Salva</button>
@@ -75,6 +80,7 @@ export default {
       return{
           options: ["€/unità", "€/ora", "€/minuto", "€/kg"],
           discounts : this.createDiscounts(),
+          imagesArray: null,
           prod: {
             'name': this.productUpdate ? this.productUpdate.name : null,
             'description': this.productUpdate ? this.productUpdate.description : null,
@@ -82,12 +88,15 @@ export default {
             'availability' : this.productUpdate ? this.productUpdate.availability : null,
             'cost' : this.productUpdate ? this.productUpdate.cost : null,
             'measure' : this.productUpdate ? this.productUpdate.measure : '',
-            'discount' : this.productUpdate ? this.productUpdate.discount : null,
+            'discount' : this.productUpdate ? this.productUpdate.discount : null
           }
       }       
   },
   methods: {
       sendData(){
+          if(this.imagesArray){
+              this.prod['images']= this.imagesArray;
+          }
          if(this.productUpdate){
              this.$inertia.post(route('product.update', {'id': this.productUpdate.id}), this.prod);
          }else{
@@ -118,7 +127,10 @@ export default {
         }
 
         return dis;
-    }
+    },
+    onChange (event) {
+          this.imagesArray = event.target.files
+        },
   }
 }
 </script>

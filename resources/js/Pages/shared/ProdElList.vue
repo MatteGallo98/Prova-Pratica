@@ -8,6 +8,11 @@
       </h2>
     </div>
     <h2 class="titleProd">{{ product.name }}</h2>
+    <div class="presentationImage row" v-if="product.product_images.length !== 0">
+        <div class="col" v-for="(prod_image, key) in product.product_images" :key="key">
+            <img :src="'storage/images/'+prod_image.file_path" :name="prod_image.name" width="100"/>
+        </div>
+    </div>
     <p class="descProd">
       {{ product.description
       }}{{

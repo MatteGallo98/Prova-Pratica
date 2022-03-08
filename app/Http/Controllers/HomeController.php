@@ -52,6 +52,7 @@ class HomeController extends Controller
         ->when(!request('search')&& !request('column'), function($order){
             $order->orderBy('created_at', 'DESC');
         })
+        ->with('product_images')
         ->paginate($perPage)->withQueryString();
 
         return Inertia::render('Index')->with([

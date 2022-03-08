@@ -34,6 +34,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       options: ["€/unità", "€/ora", "€/minuto", "€/kg"],
       discounts: this.createDiscounts(),
+      imagesArray: null,
       prod: {
         'name': this.productUpdate ? this.productUpdate.name : null,
         'description': this.productUpdate ? this.productUpdate.description : null,
@@ -47,6 +48,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     sendData: function sendData() {
+      if (this.imagesArray) {
+        this.prod['images'] = this.imagesArray;
+      }
+
       if (this.productUpdate) {
         this.$inertia.post(route('product.update', {
           'id': this.productUpdate.id
@@ -81,6 +86,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return dis;
+    },
+    onChange: function onChange(event) {
+      this.imagesArray = event.target.files;
     }
   }
 });
@@ -227,8 +235,17 @@ var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_18 = ["value"];
+var _hoisted_19 = {
+  "class": "form-group"
+};
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "images"
+}, "Immagini", -1
+/* HOISTED */
+);
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "btn btn-primary buttonLogin"
 }, "Salva", -1
@@ -241,7 +258,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+        onSubmit: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.sendData && $options.sendData.apply($options, arguments);
         }, ["prevent"]))
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -337,7 +354,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* KEYED_FRAGMENT */
       ))], 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.prod.discount]])]), _hoisted_19], 32
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.prod.discount]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        type: "file",
+        id: "images",
+        name: "images",
+        "class": "form-control",
+        "aria-label": "Default select example",
+        multiple: "",
+        onChange: _cache[7] || (_cache[7] = function () {
+          return $options.onChange && $options.onChange.apply($options, arguments);
+        })
+      }, null, 32
+      /* HYDRATE_EVENTS */
+      )]), _hoisted_21], 32
       /* HYDRATE_EVENTS */
       )])];
     }),
