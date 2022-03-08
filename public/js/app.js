@@ -52604,6 +52604,14 @@ var map = {
 		"./resources/js/Pages/Add_Update_User.vue",
 		"resources_js_Pages_Add_Update_User_vue"
 	],
+	"./Cart": [
+		"./resources/js/Pages/Cart.vue",
+		"resources_js_Pages_Cart_vue"
+	],
+	"./Cart.vue": [
+		"./resources/js/Pages/Cart.vue",
+		"resources_js_Pages_Cart_vue"
+	],
 	"./Gest_Table": [
 		"./resources/js/Pages/Gest_Table.vue",
 		"resources_js_Pages_Gest_Table_vue"
@@ -52675,6 +52683,14 @@ var map = {
 	"./shared/Button.vue": [
 		"./resources/js/Pages/shared/Button.vue",
 		"resources_js_Pages_shared_Button_vue"
+	],
+	"./shared/CartEl": [
+		"./resources/js/Pages/shared/CartEl.vue",
+		"resources_js_Pages_shared_CartEl_vue"
+	],
+	"./shared/CartEl.vue": [
+		"./resources/js/Pages/shared/CartEl.vue",
+		"resources_js_Pages_shared_CartEl_vue"
 	],
 	"./shared/ProdAmount": [
 		"./resources/js/Pages/shared/ProdAmount.vue",
@@ -52868,7 +52884,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Add_Update_Order_vue":"baa302d7a6cdd87b","resources_js_Pages_Add_Update_Product_vue":"30ed7b8c5e010e2c","resources_js_Pages_Add_Update_User_vue":"e4dd19784b99a82f","resources_js_Pages_Gest_Table_vue":"e86b61c3ddfcb066","resources_js_Pages_Index_vue":"592d3fc605c6c832","resources_js_Pages_Layout_vue":"6465c60876bfc149","resources_js_Pages_Login_vue":"b075def666e3f6d1","resources_js_Pages_X_vue":"004a7cd5dcca80d9","resources_js_Pages_gest_Ordini_vue":"900165b376b745e0","resources_js_Pages_gest_Prodotti_vue":"8b0dac44d242e8b5","resources_js_Pages_gest_Utenti_vue":"8c85605d0b32f11c","resources_js_Pages_shared_Button_vue":"ff264e0dabead9bc","resources_js_Pages_shared_ProdAmount_vue":"b323f9823c06cd4f","resources_js_Pages_shared_ProdElList_vue":"654b7984f217e0fe","resources_js_Pages_shared_SelectorPage_vue":"19dce576f46a19dc","resources_js_Pages_shared_navbar_vue":"2228248c80c230ff","resources_js_Pages_shared_searchAndReload_vue":"97abad7ac79a7155","resources_js_Pages_shared_thTable_vue":"7029dc578c0f2a2c"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Add_Update_Order_vue":"9f3cc254dc79a6b1","resources_js_Pages_Add_Update_Product_vue":"a64aac16a9037bb0","resources_js_Pages_Add_Update_User_vue":"846b3b36c82b368c","resources_js_Pages_Cart_vue":"ada3789815db15d4","resources_js_Pages_Gest_Table_vue":"8ad02d41e82fb31f","resources_js_Pages_Index_vue":"8613a0cc823e6f0f","resources_js_Pages_Layout_vue":"d570782d95fa6065","resources_js_Pages_Login_vue":"b075def666e3f6d1","resources_js_Pages_X_vue":"004a7cd5dcca80d9","resources_js_Pages_gest_Ordini_vue":"87a5fe37dab0c19d","resources_js_Pages_gest_Prodotti_vue":"3d21f791aed11a33","resources_js_Pages_gest_Utenti_vue":"6da55a43bc51c134","resources_js_Pages_shared_Button_vue":"ff264e0dabead9bc","resources_js_Pages_shared_CartEl_vue":"16051aaaed8fbd20","resources_js_Pages_shared_ProdAmount_vue":"b323f9823c06cd4f","resources_js_Pages_shared_ProdElList_vue":"fc5d321cf94bbeb7","resources_js_Pages_shared_SelectorPage_vue":"19dce576f46a19dc","resources_js_Pages_shared_navbar_vue":"1fc433bb60fcfedc","resources_js_Pages_shared_searchAndReload_vue":"97abad7ac79a7155","resources_js_Pages_shared_thTable_vue":"7029dc578c0f2a2c"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

@@ -107,7 +107,7 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $route)
     {
         $request->validate([
             'status' => 'required|string',
@@ -149,8 +149,9 @@ class OrderController extends Controller
        
         $order->products()->sync($products);
 
-        return redirect()->route('gest_ordini');
+        return redirect()->route('gest_ordini'); 
 
+    
     }
 
     /**
@@ -207,7 +208,7 @@ class OrderController extends Controller
     { 
         Order::where('id', $id)->firstorfail()->delete();
         echo ("Prodotto cancellato con successo.");
-        return redirect()->route('gest_utenti', [
+        return redirect()->route('gest_ordini', [
             'perPage'=> $perPage 
         ]);
     }

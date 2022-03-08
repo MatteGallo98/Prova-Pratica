@@ -19,12 +19,15 @@ Route::get('/', 'HomeController@index')->name('homepage');
 
 Route::post('/shopping', 'ShoppingController@store')->name('shopping');
 
+Route::get('/cart', 'CartController@index')->middleware(['auth'])->name('cart');
 
 Route::get('/login', function () {
     return Inertia::render('Login');
-} )->middleware(['guest'])->name('login');
+})->middleware(['guest'])->name('login');
 
 Route::get('/gest_utenti', 'UserController@index')->middleware(['auth'])->name('gest_utenti');
+
+Route::post('/cartToOrder', 'CartController@store')->middleware(['auth'])->name('cartToOrder');
 
 
 //gestione utenti

@@ -26,7 +26,7 @@
         calculateDiscount(product)
       }}
     </p>
-    <div class="row AddCart mt-auto mx-auto">
+    <div class="row AddCart mt-auto mx-auto" v-if="!$page.props.user.admin">
       <div class="col" >
         <form @submit.prevent="addToCart" >
             <input type="number" :min="1" :max="product.availability" :name="'Amount'+product.id" :id="'Amount'+product.id" v-model="currentAmount" class="form-control quantitaCar" >
@@ -40,6 +40,7 @@
 <script>
 import moment from "moment";
 import Cookies from 'js-cookie';
+import lib from '../../shareJs/lib';
 
 export default {
   mounted(){
@@ -54,11 +55,8 @@ export default {
   },
   methods: {
     calculateDiscount(product) {
-      return (
-        product.cost -
-        product.cost * (product.discount / 100) +
-        this.getMeasure(product)
-      );
+      var dis= Number(product.cost - product.cost * (product.discount / 100)).toFixed(2) + this.getMeasure(product);
+      return dis;
     },
     format_date(value) {
       if (value) {
@@ -82,13 +80,15 @@ export default {
             'prod_max' : this.product.availability,
             'prod_price' : this.product.cost,
             'prod_dis' : this.product.discount,
+            'prod_measure': this.product.measure,
+            'prod_desc' : this.product.description
         };
 
         if(!cart){
            cart=[];
            cart.push(actualEl); 
         }else{
-            var [find, index]= this.findInCart(cart, this.product.id);
+            var [find, index]= lib.findInCart(cart, this.product.id);
             if(find){
                 cart[index].amount+=this.currentAmount;
             }else{
@@ -98,20 +98,6 @@ export default {
         Cookies.set('cart', JSON.stringify(cart), {expires: 7})
         
     },
-    findInCart(cart, id){
-        var i=0;
-        var find= false;
-        while(i<cart.length && !find){
-            if(cart[i].prod_id == id){
-                find=true;
-            }else{
-             i++;   
-            }
-        }
-         
-        console.log(find);
-        return [find,i];
-    }
   },
 };
 </script>

@@ -15,6 +15,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _shared_thTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/thTable */ "./resources/js/Pages/shared/thTable.vue");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _shareJs_lib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../shareJs/lib */ "./resources/js/shareJs/lib.js");
+
 
 
 
@@ -28,16 +30,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     cancella: function cancella(id) {
-      console.log(id);
-      console.log(this.data.perPage);
-      this.$inertia.post(route('order.destroy', {
-        'id': id,
-        'perPage': this.data.perPage
-      }));
+      if (confirm("Vuoi veramente cancellarlo?")) {
+        this.$inertia.post(route("order.destroy", {
+          id: id,
+          perPage: this.data.perPage
+        }));
+      }
     },
     format_date: function format_date(value) {
       if (value) {
-        return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('DD MM YYYY');
+        return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format("DD MM YYYY");
       }
     }
   }
@@ -120,13 +122,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.format_date(order.created_at)), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.final_price + ' €'), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.final_price + " €"), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.final_discount_price + ' €'), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.final_discount_price + " €"), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
       href: _ctx.route('order.edit', {
-        'id': order.id
+        id: order.id
       })
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -248,6 +250,58 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   )), _hoisted_6, _hoisted_7]);
 }
+
+/***/ }),
+
+/***/ "./resources/js/shareJs/lib.js":
+/*!*************************************!*\
+  !*** ./resources/js/shareJs/lib.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var lib = {
+  changeValue: function changeValue(event, formData) {
+    var nodoCheckbox = document.getElementById(event.target.id);
+    console.log(nodoCheckbox.value);
+
+    if (nodoCheckbox.value == 1) {
+      formData[event.target.id] = '0';
+      nodoCheckbox.value = 0;
+    } else {
+      formData[event.target.id] = '1';
+      nodoCheckbox.value = 1;
+    }
+
+    console.log(formData);
+  },
+  nodoControl: function nodoControl(id, updateData) {
+    if (updateData && updateData[id] == 1) {
+      var nodo = document.getElementById(id);
+      nodo.click();
+    }
+  },
+  findInCart: function findInCart(cart, id) {
+    var i = 0;
+    var find = false;
+
+    while (i < cart.length && !find) {
+      if (cart[i].prod_id == id) {
+        find = true;
+      } else {
+        i++;
+      }
+    }
+
+    console.log(find);
+    return [find, i];
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (lib);
 
 /***/ }),
 

@@ -176,7 +176,7 @@ class ProductController extends Controller
     {
         Product::where('id', $id)->firstorfail()->delete();
         echo ("Prodotto cancellato con successo.");
-        return redirect()->route('gest_utenti', [
+        return redirect()->route('gest_prodotti', [
             'perPage'=> $perPage 
         ]);
     }

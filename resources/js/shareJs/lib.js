@@ -17,7 +17,22 @@ var lib= {
         var nodo=document.getElementById(id);
         nodo.click();
     }
- }
+ },
+ findInCart(cart, id){
+    var i=0;
+    var find= false;
+    while(i<cart.length && !find){
+        if(cart[i].prod_id == id){
+            find=true;
+        }else{
+         i++;   
+        }
+    }
+     
+    console.log(find);
+    return [find,i];
+},
+ 
 }
 
 

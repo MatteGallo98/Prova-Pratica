@@ -13,7 +13,7 @@
                         </li>
            
                         <li class="nav-item" v-if="$page.props.user && !$page.props.user.admin">
-                            <a class="nav-link underline me-auto"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                            <Link class="nav-link underline me-auto" :href="route('cart')"><i class="fa fa-shopping-cart" aria-hidden="true"></i></Link>
                         </li>
 
                             <li class="nav-item dropdown" v-if="$page.props.user">
@@ -23,7 +23,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <span v-if="$page.props.user.admin">
-                                        <a class="dropdown-item" :href="this.route('gest_utenti')">
+                                        <a class="dropdown-item" :href="route('gest_utenti')">
                                             Gestione Utenti 
                                         </a>
                                         <a class="dropdown-item" :href="route('gest_prodotti')">

@@ -28,15 +28,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     cancella: function cancella(id) {
-      console.log(id);
-      this.$inertia.post(route('product.destroy', {
-        'id': id,
-        'perPage': this.data.perPage
-      }));
+      if (confirm("Vuoi veramente cancellarlo?")) {
+        this.$inertia.post(route('product.destroy', {
+          id: id,
+          perPage: this.data.perPage
+        }));
+      }
     },
     format_date: function format_date(value) {
       if (value) {
-        return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('DD MM YYYY');
+        return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format("DD MM YYYY");
       }
     }
   }
@@ -113,11 +114,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.measure), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.discount ? product.discount + "%" : ''), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.discount ? product.discount + "%" : ""), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
       href: _ctx.route('product.edit', {
-        'id': product.id
+        id: product.id
       })
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
