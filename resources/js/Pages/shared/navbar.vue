@@ -34,7 +34,7 @@
                                         </a>
                                     </span>
                                     <span v-else>
-                                        <a class="dropdown-item" :href="route('gest_utenti')">
+                                        <a class="dropdown-item" :href="route('userOrders',{'id': $page.props.user.id})">
                                             Riepilogo Ordini 
                                         </a>
                                    </span>

@@ -197,7 +197,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , _hoisted_16)])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": "dropdown-item",
-    href: _ctx.route('gest_utenti')
+    href: _ctx.route('userOrders', {
+      'id': _ctx.$page.props.user.id
+    })
   }, " Riepilogo Ordini ", 8
   /* PROPS */
   , _hoisted_18)])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {

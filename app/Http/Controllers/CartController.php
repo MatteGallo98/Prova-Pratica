@@ -26,8 +26,7 @@ class CartController extends Controller
             'status' => 'required|string',
             'user_id' => 'required|integer',
             'productsAmounts'=> 'required|array',
-           /*  'productsAmounts.*'=> 'required|object',
-           "productsAmounts.*.prod_id"  => "required|integer|exists:\App\Models\Product,id",
+            /*'productsAmounts.*'=> 'required',
             "productsAmounts.*.amount"  => "required|integer|min:1",*/
             "finalprice" => "required||numeric",
             "finaldisprice"=> "required|numeric"
@@ -49,7 +48,7 @@ class CartController extends Controller
        
         $order->products()->sync($products);
 
-        return redirect()->route('gest_ordini'); 
+        return redirect()->route('userOrders',['id'=>$request->user_id]); 
 
 
     }

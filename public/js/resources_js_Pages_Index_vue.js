@@ -635,7 +635,7 @@ var _hoisted_10 = ["max", "name", "id"];
 
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
-  "class": "btn btn-primary btnCarrello"
+  "class": "btn btn-primary"
 }, "Aggiungi al Carrello", -1
 /* HOISTED */
 );
@@ -651,7 +651,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.cost + $props.product.measure + " con sconto pari al " + $props.product.discount + "% per un complessivo di " + $options.calculateDiscount($props.product)), 1
   /* TEXT */
-  ), !_ctx.$page.props.user.admin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  ), _ctx.$page.props.user && !_ctx.$page.props.user.admin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.addToCart && $options.addToCart.apply($options, arguments);
     }, ["prevent"]))
@@ -857,7 +857,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , _hoisted_16)])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": "dropdown-item",
-    href: _ctx.route('gest_utenti')
+    href: _ctx.route('userOrders', {
+      'id': _ctx.$page.props.user.id
+    })
   }, " Riepilogo Ordini ", 8
   /* PROPS */
   , _hoisted_18)])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {

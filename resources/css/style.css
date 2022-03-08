@@ -14,8 +14,28 @@
     margin-bottom: 10px;
  }
 
+ .acquistati{
+     font-weight: 600;
+ }
+
+ .status{
+     color:black;
+     background-color: #5f9cf7;
+     border-radius: 5px;
+     padding: 5px;
+ }
  .btnCarrello{
      float: left;
+ }
+
+.UserOrder{
+     padding:2%;
+     border-bottom:2px solid #0d6efd;
+     margin-top: 1%;
+ }
+
+ .finalCount{
+     margin-top: 2%;
  }
 
  .btnCancella{

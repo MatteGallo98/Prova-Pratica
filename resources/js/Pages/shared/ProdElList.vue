@@ -26,11 +26,11 @@
         calculateDiscount(product)
       }}
     </p>
-    <div class="row AddCart mt-auto mx-auto" v-if="!$page.props.user.admin">
+    <div class="row AddCart mt-auto mx-auto" v-if=" $page.props.user && !$page.props.user.admin">
       <div class="col" >
         <form @submit.prevent="addToCart" >
             <input type="number" :min="1" :max="product.availability" :name="'Amount'+product.id" :id="'Amount'+product.id" v-model="currentAmount" class="form-control quantitaCar" >
-            <button type="submit" class="btn btn-primary btnCarrello">Aggiungi al Carrello</button>
+            <button type="submit" class="btn btn-primary">Aggiungi al Carrello</button>
         </form>
       </div>
     </div>

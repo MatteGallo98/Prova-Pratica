@@ -29,6 +29,8 @@ Route::get('/gest_utenti', 'UserController@index')->middleware(['auth'])->name('
 
 Route::post('/cartToOrder', 'CartController@store')->middleware(['auth'])->name('cartToOrder');
 
+Route::get('/userOrders/{id}', 'UserOrdersController@index')->middleware(['auth'])->name('userOrders');
+
 
 //gestione utenti
 Route::get('/utente', 'UserController@create')->middleware(['auth'])->name('user.create');
